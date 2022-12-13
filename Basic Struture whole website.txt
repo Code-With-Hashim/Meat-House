@@ -1,0 +1,81 @@
+Front-end
+
+Authenticated User -
+  -- Landing Page, --everyoone
+    -- Authenticatication
+    -- Location detected
+    -- cart modal
+    -- search navbar
+  --search Page, --everyone
+    -- category page
+  -- product page --everyone
+    -- category page, -- everyone
+      -- detail product page
+  -- category --out side
+    -- detail product page
+ 
+  -- Cart page, --- Authenticated User
+  -- Cart page -- not Authenticated and Authenticated User
+    -- add to able the product page
+      -- Address Page
+      -- Payment page
+      -- Successfully Payment Page
+
+
+Admin Panel Page -- Authenticated
+
+ -- CRUD action;
+   -- add product,
+   -- delete product,
+   -- update product,
+    -- read product
+
+-- User List
+  -Read User
+
+
+Backend Part 
+ -manage api
+ -Add product in mongoDb altas
+  --all product api
+  --category api
+    --subcategory api
+     --single product api
+
+  --User Cart api
+   --all product api
+  --category api
+    --subcategory api
+     --single product api
+
+
+--Signup
+ Add User,
+ -- Email Address && password
+ -- Google OAuth (optionally)
+    -- Name, Address
+   -cart 
+    --product id (fetch the data with product id)
+
+
+
+
+  mongoose schema  {
+        Email,
+        password,
+        Name
+        Address,  -- same
+        Location,  -- same
+        cart : [
+            {
+            product id -- 
+            total quantity : 
+            each price of product  :
+            total price 
+        }, 
+        {
+            product id
+        }
+        ]
+
+    }
