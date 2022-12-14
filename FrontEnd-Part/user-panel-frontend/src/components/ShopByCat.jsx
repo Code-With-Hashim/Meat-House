@@ -51,13 +51,13 @@ const ShopByCat = () => {
   return (
     <Box
       maxWidth="100%"
-      //   border="1px solid"
+      // border="1px solid"
 
       mt="2rem"
     >
       <Box
         mx="8%"
-        //   border="1px solid"
+        // border="1px solid"
       >
         <Heading as="h4" size="md">
           Shop by categories

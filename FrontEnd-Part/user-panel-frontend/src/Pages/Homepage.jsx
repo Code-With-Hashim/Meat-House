@@ -1,8 +1,17 @@
-import { Box, Image } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Flex,
+  Spacer,
+  Button,
+  Text,
+  Divider,
+} from "@chakra-ui/react";
 import React from "react";
-
+import MeatHouseLogo from "../MeatHouseLogo.png";
 import Navbar from "../components/Navbar";
 import ShopByCat from "../components/ShopByCat";
+import MultipleItems from "../components/BestSeller";
 const Homepage = () => {
   return (
     <>
@@ -56,10 +65,71 @@ const Homepage = () => {
       {/*................ Main Banner End ...........................*/}
       <ShopByCat />
 
-      <Box maxWidth="100%" border="1px solid" mt="2rem">
-        <Box width="60%" border="1px solid" margin="auto">
-          dfdffdf
+      <Box
+        maxWidth="100%"
+        // border="1px solid"
+        mt="2rem"
+      >
+        <Box
+          width="60%"
+          // border="1px solid"
+          margin="auto"
+          backgroundColor="#ffdc93"
+          padding="1rem 2rem"
+          borderRadius="1rem"
+        >
+          <Flex>
+            <Box>
+              {" "}
+              <Image
+                cursor="pointer"
+                boxSize="60px"
+                src={MeatHouseLogo}
+                alt="MeatHouse"
+              />
+            </Box>
+            <Spacer />
+            <Button colorScheme="red">JOIN NOW</Button>
+          </Flex>
+          <Divider borderColor="black" m="0.5rem" />
+          {/* <hr
+            style={{
+              border: "1px solid black",
+              margin: "0.5rem",
+            }}
+          ></hr> */}
+          <Text fontSize="xs">
+            Join MEATOPIA to get free delivery on all orders with cart value
+            more than Rs.99.
+          </Text>
         </Box>
+      </Box>
+
+      <Box
+        maxWidth="100%"
+        // border="1px solid"
+        mt="2rem"
+      >
+        <Box
+          width="80%"
+          border="1px solid"
+          margin="auto"
+          padding="1rem 2rem"
+          borderRadius="1rem"
+        ></Box>
+      </Box>
+      <Box
+      maxWidth="100%"
+        border="1px solid"
+
+      mt="2rem"
+    >
+      <Box
+        mx="8%"
+          border="1px solid"
+      >
+        <MultipleItems />
+      </Box>
       </Box>
     </>
   );
