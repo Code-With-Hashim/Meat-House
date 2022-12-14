@@ -47,7 +47,7 @@ let shopcat = [
     title: "Meat Masala",
   },
 ];
-const ShopByCat = () => {
+const ShopByCat = ({ title }) => {
   return (
     <Box
       maxWidth="100%"
@@ -60,7 +60,7 @@ const ShopByCat = () => {
         // border="1px solid"
       >
         <Heading as="h4" size="md">
-          Shop by categories
+          {title}
         </Heading>
         <Text fontSize="sm">Freshest meats just for you</Text>
       </Box>

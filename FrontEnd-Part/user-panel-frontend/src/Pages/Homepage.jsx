@@ -12,6 +12,7 @@ import MeatHouseLogo from "../MeatHouseLogo.png";
 import Navbar from "../components/Navbar";
 import ShopByCat from "../components/ShopByCat";
 import MultipleItems from "../components/BestSeller";
+import Blogs from "../components/Blogs";
 const Homepage = () => {
   return (
     <>
@@ -63,7 +64,7 @@ const Homepage = () => {
         </Box>
       </Box>
       {/*................ Main Banner End ...........................*/}
-      <ShopByCat />
+      <ShopByCat title={"Shop By Category"} />
 
       <Box
         maxWidth="100%"
@@ -105,32 +106,21 @@ const Homepage = () => {
         </Box>
       </Box>
 
-      <Box
-        maxWidth="100%"
-        // border="1px solid"
-        mt="2rem"
-      >
+      <Box maxWidth="100%" mt="2rem">
         <Box
           width="80%"
-          border="1px solid"
           margin="auto"
           padding="1rem 2rem"
           borderRadius="1rem"
         ></Box>
       </Box>
-      <Box
-      maxWidth="100%"
-        border="1px solid"
 
-      mt="2rem"
-    >
-      <Box
-        mx="8%"
-          border="1px solid"
-      >
-        <MultipleItems />
-      </Box>
-      </Box>
+      <MultipleItems />
+
+      <MultipleItems />
+
+      <ShopByCat title={"Explore By Category"} />
+      <Blogs />
     </>
   );
 };
