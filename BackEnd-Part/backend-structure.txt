@@ -1,0 +1,15 @@
+# All_Product
+  --Product Category
+    1. Chicken
+    2. Mutton
+    3. Fish & Seafood
+    4. Ready to Cook
+    5. Cold Cuts
+    6. Spreads
+    7. Today's Deals - Admin Decide
+    8. Eggs
+    9. Biryani & Kebab
+    10. Prawns
+    11. Plant Based Meat
+    12. Meat Masala
+    
