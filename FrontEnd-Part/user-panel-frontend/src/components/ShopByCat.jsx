@@ -1,5 +1,6 @@
 import { Box, Heading, Image, SimpleGrid, Text } from "@chakra-ui/react";
 import React from "react";
+import styles from "../css.Module/ShopByCat.module.css";
 let shopcat = [
   {
     img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/34466dbd-a515-edd1-3e99-05000f217cb6/original/Chicken_(2).png",
@@ -70,8 +71,8 @@ const ShopByCat = () => {
         <SimpleGrid columns={[2, 3, 4]} spacing="40px" mt="2rem">
           {shopcat?.map((el) => (
             <Box>
-              <Image src={`${el.img}`} />
-              <Heading margin="auto" size="md" textAlign="center">
+              <Image src={`${el.img}`} className={styles.error} />
+              <Heading margin="auto" size="md" textAlign="center" mt="1rem">
                 {el.title}
               </Heading>
             </Box>
