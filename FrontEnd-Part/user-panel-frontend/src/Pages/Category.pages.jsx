@@ -1,20 +1,107 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
+import axios from 'axios';
+import { useState } from 'react';
+import { AiOutlineCaretRight } from 'react-icons/ai';
+import styled from 'styled-components';
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  Container,
+  Grid,
+  GridItem,
+  Tooltip
+} from '@chakra-ui/react'
+import { Categories } from '../Components/Categories';
+import { ProductCard } from '../Components/Card';
 /*
   This function or page is suppose to make an api request on load with passed Category and after having the data from data base we are going to Show that perticular UI Component.
 */
 
-function CategoryPage(){
-    const Category = useParams();
-    useEffect(()=>{
-      
-    },[])
-    console.log(Category);
-    return <>
-        <h1>Data by Category</h1>
-    </>
+function CategoryPage() {
+  const Category = useParams();
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:8000/Chicken").then(res => {
+      setData(res.data);
+      console.log(res)
+    }).catch(err => console.log(err));
+  }, [])
+  console.log(Category);
+  return <>
+    <Wrapper>
+      <Container maxW='6xl'>
+        <Breadcrumb spacing='4px' separator={<AiOutlineCaretRight color='gray.500' />}>
+          <BreadcrumbItem>
+            <BreadcrumbLink href='#' color="black" textDecoration="none" >Home</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink href='#' color="red" textDecoration="none" >{Category.category === 'chicken' ? "Chicken" : ""}</BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+        <NameWrapper>
+          {Category.category === 'chicken' ? "Chicken" : ""}
+          <Tooltip1>
+
+            <img width={"43px"} src='https://d2407na1z3fc0t.cloudfront.net/USP/usp_58e78b9c4b2e0'></img>
+            <Tooltip label="Working with farmers and partners, picking breed raised humanely on controlled farms." aria-label='A tooltip'>
+              Farm raised superior breed
+            </Tooltip>
+          </Tooltip1>
+          <Tooltip1>
+
+            <img width={"43px"} src='https://d2407na1z3fc0t.cloudfront.net/USP/usp_58e78bdf673b7'></img>
+            <Tooltip label="No Added Chemical , Antibiotic residue free." aria-label='A tooltip'>
+              No Added Chemical , Antibiotic residue free.
+            </Tooltip>
+          </Tooltip1>
+        </NameWrapper>
+        {/* <hr/> */}
+        <Categories />
+        <Grid templateColumns='repeat(3, 1fr)' gap={6} mt={"50px"}>
+          {
+              data&& data.map((ele)=>{
+                return <GridItem w='100%' h='fit-content'  boxShadow='md' bg='whiteAlpha.800' borderRadius={"10px"} pb={"10px"} >
+                <ProductCard data ={ele}/>
+              </GridItem>
+              })
+          }
+        </Grid>
+      </Container>
+    </Wrapper>
+  </>
 }
 
-export {CategoryPage};
+export { CategoryPage };
+
+export const Wrapper = styled.div`
+height:fit-content;
+// border:1px solid red;
+background-color:#ededed;
+`
+
+export const NameWrapper = styled.div`
+  font-size:30px; 
+  color:#6c6c6c;
+  text-align:left;
+  display:flex;
+  gap:15px;
+  border-bottom:1px solid #e3e0e0;
+  height:50px;
+`
+
+export const Tooltip1 = styled.div`
+  color:gray;
+  display:flex;
+  font-size:small;
+  align-items:center;
+  $:hover{
+    background-color: grey;
+    color:white;
+  }
+  cursor:pointer;
+`
