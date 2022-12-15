@@ -40,7 +40,7 @@ function CategoryPage() {
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='#' color="red" textDecoration="none" >{Category.category === 'chicken' ? "Chicken" : ""}</BreadcrumbLink>
+            <BreadcrumbLink href='#' color="red" textDecoration="none" >{Category.category === 'Chicken' ? "Chicken" : ""}</BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
         <NameWrapper>
@@ -82,6 +82,7 @@ export const Wrapper = styled.div`
 height:fit-content;
 // border:1px solid red;
 background-color:#ededed;
+padding:10px;
 `
 
 export const NameWrapper = styled.div`

@@ -61,7 +61,7 @@ function ProductCard({ data }) {
                         data.rupee && data.previous_price != "" ? <div><span style={{color:"green",fontWeight:"bold"}}>{data.rupee}</span></div> : data.rupee && data.previous_price != "" && data.previous_price > data.rupee ? <div><span>{data.rupee}</span><span style={{color:"green",fontWeight:"bold"}}>MRP: {data.previous_price}</span><span>{percentage(data.rupee, data.previous_price)}%</span></div> : <span style={{color:"green",fontWeight:"bold"}}>MRP: {data.rupee}</span>
                     }
 
-                    <Button colorScheme='red' width={'fit-content'} p="2" h="8" >Add To Cart</Button>
+                    <Button colorScheme='red.500' width={'fit-content'} p="2" h="8" >Add To Cart</Button>
                 </Box>
             </Box>
 
