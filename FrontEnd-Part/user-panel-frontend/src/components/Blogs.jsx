@@ -1,5 +1,14 @@
 import React from "react";
-import { Box, Image, Flex, Card, CardBody, Heading } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Flex,
+  Card,
+  CardBody,
+  Heading,
+  Wrap,
+  SimpleGrid,
+} from "@chakra-ui/react";
 const blog = [
   {
     image:
@@ -25,7 +34,7 @@ const Blogs = () => {
           <Heading as="h4" size="md">
             Check out our blog
           </Heading>
-          <Flex>
+          <SimpleGrid columns={[1, 2, 3]}>
             {blog.map((el) => (
               <Box>
                 <Card maxW="sm">
@@ -41,7 +50,7 @@ const Blogs = () => {
                 </Card>
               </Box>
             ))}
-          </Flex>
+          </SimpleGrid>
         </Box>
         <Box>
           <Image
