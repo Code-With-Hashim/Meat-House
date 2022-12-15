@@ -1,9 +1,7 @@
 const express = require('express');
+const {ObjectId} = require('mongodb')
 
-
-
-const { Chicken_Collection_modal } = require("../../modals/Chicken_collection.modals")
-
+const { Chicken_Collection_modal } = require("../../../modals/Chicken_collection.modals")
 const Chicken_Collection_Routes = express.Router()
 
 
@@ -15,6 +13,7 @@ Chicken_Collection_Routes.get("/", async (req, res) => {
 
     const { sort_by_price } = req.query
 
+    
 
     try {
 
@@ -101,6 +100,10 @@ Chicken_Collection_Routes.get("/:id", async (req, res) => {
     }
 
 })
+
+
+
+
 
 
 module.exports = { Chicken_Collection_Routes }

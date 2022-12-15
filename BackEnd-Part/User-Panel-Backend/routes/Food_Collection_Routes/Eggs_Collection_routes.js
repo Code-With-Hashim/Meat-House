@@ -2,7 +2,7 @@ const express = require('express')
 
 const Eggs_Collection_Routes = express.Router()
 
-const { Eggs_Collection_modal } = require("../../modals/Eggs_Collection.modals")
+const { Eggs_Collection_modal } = require("../../../modals/Eggs_Collection.modals")
 
 Eggs_Collection_Routes.get("/", async (req, res) => {
     try {
@@ -90,6 +90,7 @@ Eggs_Collection_Routes.get("/:id", async (req, res) => {
     }
 
 })
+
 
 
 

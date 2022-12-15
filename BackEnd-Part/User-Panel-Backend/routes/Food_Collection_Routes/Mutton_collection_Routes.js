@@ -1,8 +1,9 @@
 const express = require('express')
+const { ObjectId } = require('mongodb')
 
 const Mutton_Collection_Routes = express.Router()
 
-const { Mutton_Collection_modal } = require("../../modals/Mutton_Collection.modal")
+const { Mutton_Collection_modal } = require("../../../modals/Mutton_Collection.modal")
 
 Mutton_Collection_Routes.get("/", async (req, res) => {
     try {
@@ -31,7 +32,7 @@ Mutton_Collection_Routes.get("/", async (req, res) => {
 
 
             } else {
-                const Mutton_collection_data = await Mutton_Collection_modal.findOne({ _id: category_id } , { Food_list: 1 })
+                const Mutton_collection_data = await Mutton_Collection_modal.findOne({ _id: category_id }, { Food_list: 1 })
 
                 // let data = Mutton_collection_data.Food_list.sort((a, b) => a.rupee.split("₹")[1] - b.rupee.split("₹")[1])
 
@@ -90,5 +91,7 @@ Mutton_Collection_Routes.get("/:id", async (req, res) => {
     }
 
 })
+
+
 
 module.exports = { Mutton_Collection_Routes }

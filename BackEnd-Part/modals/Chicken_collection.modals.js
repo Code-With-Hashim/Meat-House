@@ -1,11 +1,12 @@
 const mongoose = require('mongoose')
 
 
+
 const Chicken_Collection_Schema = mongoose.Schema({
 
 
-    "img-container src": String,
-    "tablescraper-selected-row": String,
+    img_container_src: String,
+    tablescraper_selected_row : String,
     Category_type: String,
     Category_List: String,
     Food_list: []
