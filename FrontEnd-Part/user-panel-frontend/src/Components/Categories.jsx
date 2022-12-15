@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function Categories(){
+function Categories({}){
     const [data,setData] = useState([{
         image:"https://dao54xqhg9jfa.cloudfront.net/OMS-Category/ccbbaf22-e0c7-32cc-e3a2-8ca49beb585b/original/Chicken_(1).png",
         name:"All"

@@ -25,11 +25,12 @@ function CategoryPage() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:8000/Chicken").then(res => {
-      setData(res.data);
-      console.log(res)
-    }).catch(err => console.log(err));
+    fetch("http://localhost:8000/Chicken").then(res=>res.json()).then(res=>{
+      setData(res.data)  
+      console.log({"Data":data});
+    console.log(res)}).catch(err=>console.log(err));
   }, [])
+
   console.log(Category);
   return <>
     <Wrapper>
@@ -40,11 +41,11 @@ function CategoryPage() {
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='#' color="red" textDecoration="none" >{Category.category === 'Chicken' ? "Chicken" : ""}</BreadcrumbLink>
+            <BreadcrumbLink href='#' color="red" textDecoration="none" >{Category.category}</BreadcrumbLink>
           </BreadcrumbItem>
         </Breadcrumb>
         <NameWrapper>
-          {Category.category === 'chicken' ? "Chicken" : ""}
+          {Category.category}
           <Tooltip1>
 
             <img width={"43px"} src='https://d2407na1z3fc0t.cloudfront.net/USP/usp_58e78b9c4b2e0'></img>
@@ -60,8 +61,8 @@ function CategoryPage() {
             </Tooltip>
           </Tooltip1>
         </NameWrapper>
-        {/* <hr/> */}
-        <Categories />
+        <hr/>
+        <Categories data={data}/>
         <Grid templateColumns='repeat(3, 1fr)' gap={6} mt={"50px"}>
           {
               data&& data.map((ele)=>{
