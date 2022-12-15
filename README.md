@@ -93,8 +93,15 @@
     `Authorization` : `Bearer <token>`
     }
     
- - GET REQUEST : 
-  - All Product list data which is added by the User  `/cart`
+ - GET REQUEST : <br>`All Product list data which is added by the User  "/cart"`</br>
+ 
+ - DELETE REQUEST : <b>`When User want to Delete the Item in the cart`</b> 
+  - Pass the ID as a Params - `/cart:id`
+   - Send the `token` in headers as authorization
+   - UserID already exist beacuse it was a Parent ID
+    - headers : {
+    `Authorization` : `Bearer <token>`
+    }
   
  # User-Address API   `(Relation Ship with User Collection)`
 
