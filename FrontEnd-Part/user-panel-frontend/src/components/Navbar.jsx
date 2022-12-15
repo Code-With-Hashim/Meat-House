@@ -20,6 +20,7 @@ import {
   Hide,
   Show,
 } from "@chakra-ui/react";
+
 import Category from "./Category.jsx";
 
 let cat = [
@@ -68,6 +69,7 @@ let cat = [
     title: "Meat Masala",
   },
 ];
+
 const Navbar = () => {
   const [loc, setLoc] = useState("");
   const success = async (position) => {
@@ -194,6 +196,7 @@ const Navbar = () => {
             </Hide>
           </Flex>
         </Box>
+
       </Box>
       <Show below="720px">
         <Box
