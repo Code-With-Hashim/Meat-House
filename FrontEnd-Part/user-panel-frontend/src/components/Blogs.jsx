@@ -30,7 +30,7 @@ const Blogs = () => {
   return (
     <Box maxWidth="100%" mt="2rem">
       <Box width="80%" margin="auto" padding="1rem 2rem" borderRadius="1rem">
-        <Box>
+        <Box textAlign="left">
           <Heading as="h4" size="md">
             Check out our blog
           </Heading>

@@ -130,7 +130,11 @@ const Category = ({ cat }) => {
           <List backgroundColor="#F1F1F1">
             {sub?.map((el) => (
               <ListItem backgroundColor="#F1F1F1">
-                <MenuItem backgroundColor="#F1F1F1" m="auto">
+                <MenuItem
+                  backgroundColor="#F1F1F1"
+                  m="auto"
+                  className={styles.hvr}
+                >
                   {el}
                 </MenuItem>
               </ListItem>

@@ -12,9 +12,10 @@ import Navbar from "../components/Navbar";
 import ShopByCat from "../components/ShopByCat";
 import MultipleItems from "../components/BestSeller";
 import Blogs from "../components/Blogs";
+import Footer from "../components/Footer";
 const Homepage = () => {
   return (
-    <Box>
+    <Box backgroundColor="#F7F6F6">
       <Navbar />
       {/*................ Main Banner ...........................*/}
       <Box position="relative">
@@ -115,11 +116,28 @@ const Homepage = () => {
       </Box>
 
       <MultipleItems />
+      <Box
+        maxWidth="100%"
+        // border="1px solid"
+        mt="2rem"
+      >
+        <Box
+          width="80%"
+          // border="1px solid"
+          margin="auto"
+        >
+          <Image
+            width="100%"
+            src="https://dao54xqhg9jfa.cloudfront.net/OMS-StaticBanner/a5372f18-3f0a-a801-0160-cb20957f3acd/original/static-bank-units-nov-web.jpg"
+          />
+        </Box>
+      </Box>
 
       <MultipleItems />
 
       <ShopByCat title={"Explore By Category"} />
       <Blogs />
+      <Footer />
     </Box>
   );
 };

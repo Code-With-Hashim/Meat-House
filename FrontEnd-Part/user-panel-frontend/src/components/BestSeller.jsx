@@ -27,8 +27,10 @@ export default class MultipleItems extends Component {
     return (
       <Box maxWidth="100%" mt="2rem">
         <Box mx="8%">
-          <div>
-            <h2> Multiple items </h2>
+          <Box textAlign="left">
+            <Heading as="h4" size="md">
+              Best Seller
+            </Heading>
             <Slider {...settings}>
               {array.map((el) => (
                 <Card maxW="sm">
@@ -64,7 +66,7 @@ export default class MultipleItems extends Component {
                 </Card>
               ))}
             </Slider>
-          </div>
+          </Box>
         </Box>
       </Box>
     );

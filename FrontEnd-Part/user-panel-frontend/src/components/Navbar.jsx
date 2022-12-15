@@ -91,11 +91,12 @@ const Navbar = () => {
     <>
       <Box
         maxWidth="100%"
-        border="1px solid"
+        // border="1px solid"
         position="sticky"
         top="0"
         backgroundColor="white"
         zIndex="1000"
+        boxShadow="rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px"
       >
         <Box mx="8%">
           <Flex alignItems="center">
