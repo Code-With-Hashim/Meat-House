@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import { CategoryPage } from "../Pages/Category.pages";
-import Homepage from "../Pages/Homepage";
 import { SingleProductPage } from "../Pages/SignleProduct.pages";
 import { SubCategoryPage } from "../Pages/SubCategory.page";
 import Homepage from "../Pages/Homepage";
@@ -18,7 +17,7 @@ function Router(){
         </Routes>
 
     </>
-  );
+ 
 }
 
 export { Router };
