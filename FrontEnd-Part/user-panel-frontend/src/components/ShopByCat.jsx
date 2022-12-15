@@ -58,6 +58,7 @@ const ShopByCat = ({ title }) => {
       <Box
         mx="8%"
         // border="1px solid"
+        textAlign="left"
       >
         <Heading as="h4" size="md">
           {title}
