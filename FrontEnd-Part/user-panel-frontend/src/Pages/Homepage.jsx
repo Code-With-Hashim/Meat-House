@@ -7,7 +7,6 @@ import {
   Text,
   Divider,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
 import MeatHouseLogo from "../MeatHouseLogo.png";
 import Navbar from "../components/Navbar";
 import ShopByCat from "../components/ShopByCat";
@@ -16,7 +15,7 @@ import Blogs from "../components/Blogs";
 const Homepage = () => {
   return (
     <Box>
-      <Navbar location={loc} />
+      <Navbar />
       {/*................ Main Banner ...........................*/}
       <Box position="relative">
         <Box>
