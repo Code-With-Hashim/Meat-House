@@ -10,6 +10,17 @@
  - Param Raj
  - Ajit Shelake
  
+ # Backend : Tech Stack -
+  - Node
+  - ExpressJS
+  - MongoDB
+  
+  ## Backend npm Package Liabrary
+   - Mongoose
+   - JWT
+   - bcrypt
+   - request-ip
+ 
  # Product API
  - Chicken Collection API
      - All Category API 
