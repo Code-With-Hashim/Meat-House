@@ -1,8 +1,9 @@
 const express = require('express')
+const { ObjectId } = require('mongodb')
 
 const Marindas_Collection_Routes = express.Router()
 
-const { Marindas_Collection_modal } = require("../../modals/Ready_to_cook_collection.modals")
+const { Marindas_Collection_modal } = require("../../../modals/Ready_to_cook_collection.modals")
 
 Marindas_Collection_Routes.get("/", async (req, res) => {
     try {
@@ -90,6 +91,8 @@ Marindas_Collection_Routes.get("/:id", async (req, res) => {
     }
 
 })
+
+
 
 
 module.exports = { Marindas_Collection_Routes }

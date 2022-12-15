@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 
 const Prawns_Collection_Routes = express.Router()
 
-const { Prawns_Collection_modal } = require("../../modals/Prawns_Collection.modals")
+const { Prawns_Collection_modal } = require("../../../modals/Prawns_Collection.modals")
 
 Prawns_Collection_Routes.get("/", async (req, res) => {
     try {
@@ -91,6 +91,8 @@ Prawns_Collection_Routes.get("/:id", async (req, res) => {
     }
 
 })
+
+
 
 
 
