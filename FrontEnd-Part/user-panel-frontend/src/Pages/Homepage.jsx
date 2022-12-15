@@ -14,24 +14,6 @@ import ShopByCat from "../components/ShopByCat";
 import MultipleItems from "../components/BestSeller";
 import Blogs from "../components/Blogs";
 const Homepage = () => {
-  const [loc, setLoc] = useState("");
-  const success = async (position) => {
-    console.log(position.coords.latitude, position.coords.longitude);
-    const promis = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=07dab470b0004f5e9b651111221512&q=${position.coords.latitude},${position.coords.longitude}&aqi=yes`
-    );
-    promis.json().then((res) => {
-      console.log(res.location.name);
-      setLoc(res.location.name);
-    });
-  };
-  const error = () => {
-    console.log("error");
-  };
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(success, error);
-  }, []);
-
   return (
     <Box>
       <Navbar location={loc} />
