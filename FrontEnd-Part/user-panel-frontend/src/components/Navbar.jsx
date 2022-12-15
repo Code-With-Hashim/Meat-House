@@ -18,6 +18,9 @@ import {
   MenuGroup,
   MenuDivider,
 } from "@chakra-ui/react";
+import Cart from "./Cart";
+
+
 const Navbar = () => {
   return (
     <Box
@@ -144,7 +147,8 @@ const Navbar = () => {
               src="https://www.licious.in/img/rebranding/cart_icon.svg"
               alt="."
             />
-            <Text fontSize="xs">Cart</Text>
+            <Cart/>
+            <Text fontSize="xs"></Text>
           </Box>
         </Flex>
       </Box>
