@@ -10,6 +10,7 @@ const { Prawns_Collection_Routes } = require("./User-Panel-Backend/routes/Food_C
 const { User_Authenticated_Router } = require('./User-Panel-Backend/routes/User_Authenticated_Routes/User_Authenticated_Routes')
 const { User_Cart_Routes } = require("./User-Panel-Backend/routes/Cart_routes/User_Cart_routes")
 const { User_Address_Router } = require('./User-Panel-Backend/routes/Address_Routes/Address_Routes')
+const { Mix_Food_Collection_Routes } = require('./User-Panel-Backend/routes/Food_Collection_Routes/MixFood_Collection_Routes')
 
 const app = express()
 const PORT = 8080
@@ -22,6 +23,7 @@ app.use("/Mutton", Mutton_Collection_Routes)
 app.use("/Marindas", Marindas_Collection_Routes)
 app.use("/Eggs", Eggs_Collection_Routes)
 app.use("/Prawns", Prawns_Collection_Routes)
+app.use("/mixfood" , Mix_Food_Collection_Routes)
 
 //User-Collection ---Routes
 app.use("/User", User_Authenticated_Router)
