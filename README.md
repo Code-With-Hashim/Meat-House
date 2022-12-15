@@ -88,7 +88,7 @@
  # User-Address API   `(Relation Ship with User Collection)`
 
  - POST REQUEST : <b>`When User want to Add the Address in our own collection`</b> 
-   - Pass the ID as a Params - `/address`
+   -  - `/address`
    - Send the `token` in headers as authorization
    - UserID already exist beacuse it was a Parent ID
     - headers : {
