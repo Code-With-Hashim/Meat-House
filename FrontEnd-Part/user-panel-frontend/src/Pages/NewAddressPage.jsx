@@ -3,6 +3,7 @@ import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
 import sa from "../css.Module/NewAddress.module.css"
 import {BsFillCircleFill} from "react-icons/bs"
+import { Link } from "react-router-dom"
 
 
 
@@ -44,7 +45,7 @@ const NewAddress = () => {
                     <Box >
                         <Button colorScheme="red" width="80%">Save and Proceed</Button>
                     </Box>
-                    <Text textAlign="left">Back</Text>
+                    <Link to="/address" textAlign="left">Back</Link>
 
 
 
