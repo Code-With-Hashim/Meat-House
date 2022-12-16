@@ -23,14 +23,23 @@ import { ProductCard } from '../Components/Card';
 function CategoryPage() {
   const Category = useParams();
   const [data, setData] = useState([]);
-
+  // const [state,setState]= useState("");
+  function handleClick(id){
+    axios.get(`http://localhost:8080/${Category.category}?category_id=${id}`).then(res=>{
+      setData(res.data.Food_list)
+      console.log(data);
+    }).catch(err =>console.log(err));
+  }
   useEffect(() => {
-    fetch("http://localhost:8000/Chicken").then(res=>res.json()).then(res=>{
-      setData(res.data)  
-      console.log({"Data":data});
-    console.log(res)}).catch(err=>console.log(err));
-  }, [])
+    axios.get(`http://localhost:8080/${Category.category}`).then(res=>{
+      setData(res.data[0].Food_list);  
+      // console.log(res.data[0].Food_list);
+      }).catch(err=>console.log(err));
+      // console.log(data);
+  }
+  , [])
 
+  
   console.log(Category);
   return <>
     <Wrapper>
@@ -39,7 +48,6 @@ function CategoryPage() {
           <BreadcrumbItem>
             <BreadcrumbLink href='#' color="black" textDecoration="none" >Home</BreadcrumbLink>
           </BreadcrumbItem>
-
           <BreadcrumbItem>
             <BreadcrumbLink href='#' color="red" textDecoration="none" >{Category.category}</BreadcrumbLink>
           </BreadcrumbItem>
@@ -62,12 +70,12 @@ function CategoryPage() {
           </Tooltip1>
         </NameWrapper>
         <hr/>
-        <Categories data={data}/>
+        <Categories handleClick ={handleClick} category={Category.category}/>
         <Grid templateColumns='repeat(3, 1fr)' gap={6} mt={"50px"}>
           {
-              data&& data.map((ele)=>{
-                return <GridItem w='100%' h='fit-content'  boxShadow='md' bg='whiteAlpha.800' borderRadius={"10px"} pb={"10px"} >
-                <ProductCard data ={ele}/>
+              data && data.map((ele,index)=>{
+                return <GridItem key={index} w='100%' h='fit-content'  boxShadow='md' bg='whiteAlpha.800' borderRadius={"10px"} pb={"10px"} >
+                <ProductCard data={ele}/>
               </GridItem>
               })
           }

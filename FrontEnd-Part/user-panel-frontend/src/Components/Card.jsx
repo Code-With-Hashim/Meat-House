@@ -18,8 +18,8 @@ function ProductCard({ data }) {
         rating: 4,
     }
     return <>
-        <Box maxW='sm'  borderRadius='10px' overflow='hidden'>
-            <Image src={"https://dao54xqhg9jfa.cloudfront.net/OMS-ProductMerchantdising/91a06457-417e-a693-46bb-366a8cdea75a/original/Tender-Spring-Chicken-Curry-Cut-Hero-Shot.jpg?format=webp"} alt={property.imageAlt} />
+        <Box maxW='sm' borderRadius='10px' overflow='hidden'>
+            <Image src={data.product_image_src} alt={"Product Image"} />
 
             <Box pl='4' pt={'2'}>
                 <Box
@@ -31,18 +31,17 @@ function ProductCard({ data }) {
                     fontSize="15px"
                     color="#625c5c"
                 >
-                    {data.title}
+                    {data.product_name}
                 </Box>
                 <Box
                     mb='1'
                     fontWeight='normal'
-                    //   lineHeight='tight'
                     noOfLines={1}
                     textAlign="left"
                     fontSize="15px"
                     color="#625c5c"
                 >
-                    {data.details}
+                    {data.item_desc}
                 </Box>
                 <Box
                     mb='1'
@@ -53,15 +52,20 @@ function ProductCard({ data }) {
                     fontSize="13px"
                     color="#625c5c"
                 >
-                    {data.weight}
+                    {data.net_weight}
                 </Box>
                 <Box display={"flex"} alignItems="center" justifyContent={"space-between"} pr="15px">
-
                     {
-                        data.rupee && data.previous_price != "" ? <div><span style={{color:"green",fontWeight:"bold"}}>{data.rupee}</span></div> : data.rupee && data.previous_price != "" && data.previous_price > data.rupee ? <div><span>{data.rupee}</span><span style={{color:"green",fontWeight:"bold"}}>MRP: {data.previous_price}</span><span>{percentage(data.rupee, data.previous_price)}%</span></div> : <span style={{color:"green",fontWeight:"bold"}}>MRP: {data.rupee}</span>
+                       data.price === data.rupee ? <span style={{ color: "green", fontWeight: "bold" }}>MRP: {data.rupee}</span>:<span style={{ color: "red", fontWeight: "bold" }}>{data.rupee}</span>
                     }
+                    <span style={{ color: "green", fontWeight: "bold" }}>{data.offer_discount}</span>
+                    {/* {
+                        data.rupee && data.previous_price != "" ? <div><span style={{color:"green",fontWeight:"bold"}}>{data.rupee}</span></div> : data.rupee && data.previous_price != "" && data.previous_price > data.rupee ? <div><span>{data.rupee}</span></div> : <span style={{color:"green",fontWeight:"bold"}}>MRP: {data.rupee}</span>
+                    } */}
 
-                    <Button colorScheme='red.500' width={'fit-content'} p="2" h="8" >Add To Cart</Button>
+                    <Button colorScheme='red' variant='solid'>
+                        Add To cart
+                    </Button>
                 </Box>
             </Box>
 

@@ -1,44 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Tabs, TabList, TabPanels, Tab, TabPanel, Text } from '@chakra-ui/react'
+import axios from 'axios';
 
-function Categories({}){
-    const [data,setData] = useState([{
-        image:"https://dao54xqhg9jfa.cloudfront.net/OMS-Category/ccbbaf22-e0c7-32cc-e3a2-8ca49beb585b/original/Chicken_(1).png",
-        name:"All"
-    },{
-        image:"https://dao54xqhg9jfa.cloudfront.net/OMS-Category/ccbbaf22-e0c7-32cc-e3a2-8ca49beb585b/original/Chicken_(1).png",
-        name:"Curry Cuts"
-    },
-    {
-        image:"https://dao54xqhg9jfa.cloudfront.net/OMS-Category/ccbbaf22-e0c7-32cc-e3a2-8ca49beb585b/original/Chicken_(1).png",
-        name:"Boneless & Mince"
-    },
-    {
-        image:"https://dao54xqhg9jfa.cloudfront.net/OMS-Category/ccbbaf22-e0c7-32cc-e3a2-8ca49beb585b/original/Chicken_(1).png",
-        name:"Speciality Cuts"
-    },
-    {
-        image:"https://dao54xqhg9jfa.cloudfront.net/OMS-Category/ccbbaf22-e0c7-32cc-e3a2-8ca49beb585b/original/Chicken_(1).png",
-        name:"Combos"
-    },
-    {
-        image:"https://dao54xqhg9jfa.cloudfront.net/OMS-Category/ccbbaf22-e0c7-32cc-e3a2-8ca49beb585b/original/Chicken_(1).png",
-        name:"Ready to Cook"
-    },
-    {
-        image:"https://dao54xqhg9jfa.cloudfront.net/OMS-Category/ccbbaf22-e0c7-32cc-e3a2-8ca49beb585b/original/Chicken_(1).png",
-        name:"Meat Masalas"
-    }]);
+function Categories({category,handleClick}){
+    // console.log({"data":data});
+    const [data,setData] = useState([]);
+    useEffect(() => {
+        axios.get(`http://localhost:8080/${category}`).then(res=>{
+          setData(res.data)  
+        //   console.log(res);
+        // console.log(res)
+    }).catch(err=>console.log(err));
+      }, [])
+
     return <>
-        <div style={{display:'flex',gap:"25px",borderBottom:"1px solid #e3e0e0",height:"70px"}}>
+        <Tabs colorScheme='red' style={{display:'flex',gap:"25px",borderBottom:"1px solid #e3e0e0",height:"70px"}}>
+            <TabList>
             {
-                data&& data.map((ele)=>{
-                    return <div style={{display:'flex',alignItems:'center',gap:"5px",fontSize:'small', fontWeight:"600", cursor:"pointer",color:'gray'}}>
-                        <img src={ele.image} alt="image" style={{borderRadius:"50%"}} width="30px"/>
-                        {ele.name}
-                    </div>
+                data&& data.map((ele,index)=>{
+                    return <Tab key={index} onClick={()=>handleClick(ele._id)} display={'flex'} alignItems="center" gap={"5px"} cursor="pointer" >
+                        <img src={ele.img_container_src} alt="image" style={{borderRadius:"50%"}} width="30px"/>
+                        <Text color="gray">
+                        {ele.Category_List}
+                        </Text>
+                    </Tab>
                 })
             }
-        </div>
+            </TabList>
+        </Tabs>
     </>
 }
 
