@@ -42,7 +42,7 @@ const Address = () => {
 
                         </Box>
                     </Box>
-                    <Button padding="5px" textAlign="center" justifyContent="flex-start" display="flex " marginTop="20px" colorScheme="red" w="40%">Proceed To Shipment</Button>
+                    <Button padding="5px" textAlign="center" justifyContent="flex-start" display="flex " marginTop="20px" colorScheme="red" w="40%"><Link to="/summary">Proceed To Shipment</Link></Button>
                 </Box>
 
 
