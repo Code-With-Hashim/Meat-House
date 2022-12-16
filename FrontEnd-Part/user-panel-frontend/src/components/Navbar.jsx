@@ -22,6 +22,7 @@ import {
 } from "@chakra-ui/react";
 
 import Category from "./Category.jsx";
+import Cart from "./Cart";
 
 let cat = [
   {
@@ -191,7 +192,8 @@ const Navbar = () => {
                   src="https://www.licious.in/img/rebranding/cart_icon.svg"
                   alt="."
                 />
-                <Text fontSize="xs">Cart</Text>
+                <Text fontSize="xs"><Cart/></Text>
+               
               </Box>
             </Hide>
           </Flex>
@@ -316,7 +318,8 @@ const Navbar = () => {
                   src="https://www.licious.in/img/rebranding/cart_icon.svg"
                   alt="."
                 />
-                <Text fontSize="xs">Cart</Text>
+              
+                <Text fontSize="xs"></Text>
               </Box>
             </Flex>
           </Box>

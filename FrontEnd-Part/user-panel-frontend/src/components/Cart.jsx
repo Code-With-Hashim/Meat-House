@@ -4,25 +4,22 @@ import { ImCancelCircle } from 'react-icons/im'
 import sa from "../css.Module/Cart.module.css"
 import { RxCross1 } from "react-icons/rx"
 import { BiRupee } from "react-icons/bi"
-
+import { Link, NavLink } from 'react-router-dom'
 import {
   Drawer,
   DrawerBody,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
   DrawerContent,
-  DrawerCloseButton,
   useDisclosure,
   Button,
-  Input,
+
   Text,
   Box,
-  Stack,
   VStack,
   StackDivider,
   Image,
-  Link,
+  
 } from '@chakra-ui/react'
 
 const CartData = () => {
@@ -181,7 +178,10 @@ const BottomCart = () => {
             <Text fontWeight="bold" fontSize="20px">Delivery Address</Text>
           </Box>
           <Box>
-            <Text fontSize="13px" color="#D11243">change address</Text>
+            <Link to="/newaddress" style={{fontSize:"13px",color:"#D11243"}} >new address</Link> 
+            {/* <NavLink to="/newaddress" fontSize="13px" color="#D11243">hello</NavLink> */}
+            {/* <Text fontSize="13px" color="#D11243">new address</Text> */}
+           
 
           </Box>
         </Box>
@@ -204,18 +204,18 @@ const TotalAmount = () => {
             <Text>179</Text>
           </Box>
           <Box fontSize="12px" justifyContent="space-between" display="flex">
-          <Text>Delevery charge</Text>
+            <Text>Delevery charge</Text>
             <Text>50</Text>
           </Box>
           <Box fontSize="12px" justifyContent="space-between" display="flex">
-          <Text>Discount</Text>
+            <Text>Discount</Text>
             <Text>0</Text>
           </Box>
           <hr />
 
           <Box fontWeight="bold" fontSize="12px" justifyContent="space-between" display="flex">
             <Text >Total</Text>
-            <Text alignItems="center" display="flex"><BiRupee/>200</Text>
+            <Text alignItems="center" display="flex"><BiRupee />200</Text>
           </Box>
 
         </Box>
@@ -293,11 +293,13 @@ function DrawerExample() {
 
 const Cart = () => {
   return (
-    <div >
+    <Box>
       <DrawerExample />
+    </Box>
 
 
-    </div>
+
+
   )
 }
 export default Cart
