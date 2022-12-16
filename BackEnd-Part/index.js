@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express = require('express')
-
+const cors = require("cors");
 const { connect } = require('./config/db')
 const { Marindas_Collection_Routes } = require('./User-Panel-Backend/routes/Ready_to_collection.routes')
 const { Chicken_Collection_Routes } = require('./User-Panel-Backend/routes/Chicken_collection_Routes')
@@ -11,7 +11,9 @@ const { Prawns_Collection_Routes } = require('./User-Panel-Backend/routes/Prawns
 
 const app = express()
 const PORT = 8080
-
+app.use(cors({
+    origin:"*"
+}))
 app.use(express.json())
 app.use("/Chicken", Chicken_Collection_Routes)
 app.use("/Mutton", Mutton_Collection_Routes)
@@ -32,6 +34,7 @@ app.listen(PORT, async () => {
         console.log('Listening on port')
 
     } catch (error) {
-
+        console.log("Something is not correct in db connection");
+        console.log(error);
     }
 })

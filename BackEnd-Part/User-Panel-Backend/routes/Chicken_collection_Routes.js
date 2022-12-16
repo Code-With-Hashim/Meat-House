@@ -11,10 +11,8 @@ const Chicken_Collection_Routes = express.Router()
 //Category-wise api
 Chicken_Collection_Routes.get("/", async (req, res) => {
 
-    const { category_id } = req.query
-
-    const { sort_by_price } = req.query
-
+    const { category_id } = req.query;
+    const { sort_by_price } = req.query;
 
     try {
 
@@ -48,7 +46,7 @@ Chicken_Collection_Routes.get("/", async (req, res) => {
         } else {
             const Chicken_collection_data = await Chicken_Collection_modal.find()
 
-            res.send(Chicken_collection_data)
+            res.send(Chicken_collection_data);
         }
 
     } catch (error) {
