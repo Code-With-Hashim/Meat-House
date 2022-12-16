@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require('express')
+const cors = require('cors')
 
 const { connect } = require('./config/db')
 const { Chicken_Collection_Routes } = require("./User-Panel-Backend/routes/Food_Collection_Routes/Chicken_collection_Routes")
@@ -20,6 +21,9 @@ const app = express()
 const PORT = 8080
 
 app.use(express.json())
+app.use(cors({
+    origin : "*"
+}))
 
 // Food Collection ---Routes
 app.use("/Chicken", Chicken_Collection_Routes)
