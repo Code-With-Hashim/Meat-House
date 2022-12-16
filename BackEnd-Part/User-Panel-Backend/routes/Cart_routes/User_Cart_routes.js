@@ -107,9 +107,9 @@ User_Cart_Routes.post("/:id", async (req, res) => {
             } else {
 
                 if (quantity) {
-                    await User_cart_modals.updateOne({ UserID , "Cart.product_id": id }, { $set: { "Cart.$.quantity": quantity } })
+                    await User_cart_modals.updateOne({ UserID, "Cart.product_id": id }, { $set: { "Cart.$.quantity": quantity } })
                     res.send({
-                        message : "'Quantity Update Successfully'"
+                        message: "'Quantity Update Successfully'"
                     })
                 } else {
                     res.status(401).send({
@@ -117,6 +117,10 @@ User_Cart_Routes.post("/:id", async (req, res) => {
                     })
                 }
             }
+        } else {
+            res.status(401).send({
+                message: "User not exist"
+            })
         }
 
     } catch (error) {
@@ -137,7 +141,14 @@ User_Cart_Routes.get("/", async (req, res) => {
 
         const Cart_list = await User_cart_modals.findOne({ UserID: req.body.UserID })
 
-        res.send(Cart_list)
+        if (Cart_list) {
+            res.send(Cart_list)
+        } else {
+            res.status(401).send({
+                message: "User not exist"
+            })
+        }
+
 
 
 
@@ -153,16 +164,17 @@ User_Cart_Routes.delete("/:id", async (req, res) => {
     const { id } = req.params
     const { UserID } = req.body
 
+    console.log
 
     try {
 
 
 
 
-        const updateDetail = await User_cart_modals.updateOne({ UserID: UserID }, { $pull: { Cart: { product_id : id } } })
+        const updateDetail = await User_cart_modals.updateOne({ UserID: UserID }, { $pull: { Cart: { product_id: id } } })
 
         console.log(updateDetail)
-        if (updateDetail.acknowledged) {
+        if (updateDetail.modifiedCount !== 0) {
             res.send({
                 message: "Cart Item Remove Successfully"
             })

@@ -16,9 +16,18 @@ const authentication = (req, res, next) => {
             }
         });
 
+        
 
         if (decoded) {
-            req.body.UserID = decoded.UserID
+            const {AdminID , UserID} = decoded
+
+            if(AdminID) {
+                req.body.AdminID = AdminID
+            } else {
+                req.body.UserID = UserID
+            }
+            
+
             next()
         } else {
             res.status(401).send({
