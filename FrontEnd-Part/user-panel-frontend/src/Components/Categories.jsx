@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Text } from '@chakra-ui/react'
 import axios from 'axios';
 
-function Categories({category,handleClick}){
+function Categories({category,handleClick,query}){
     // console.log({"data":data});
     const [data,setData] = useState([]);
     useEffect(() => {
@@ -14,8 +14,8 @@ function Categories({category,handleClick}){
       }, [])
 
     return <>
-        <Tabs colorScheme='red' style={{display:'flex',gap:"25px",borderBottom:"1px solid #e3e0e0",height:"70px"}}>
-            <TabList>
+        <Tabs  colorScheme='red' style={{display:'flex',gap:"25px",borderBottom:"1px solid #e3e0e0",height:"70px"}}>
+            <TabList  >
             {
                 data&& data.map((ele,index)=>{
                     return <Tab key={index} onClick={()=>handleClick(ele._id)} display={'flex'} alignItems="center" gap={"5px"} cursor="pointer" >

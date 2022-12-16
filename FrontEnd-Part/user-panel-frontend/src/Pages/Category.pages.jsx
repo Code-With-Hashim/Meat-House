@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useState } from 'react';
 import { AiOutlineCaretRight } from 'react-icons/ai';
@@ -21,8 +21,13 @@ import { ProductCard } from '../Components/Card';
 */
 
 function CategoryPage() {
+  const query = useLocation().search;
+  let id = new URLSearchParams(query).get("category_id");
+    console.log(id);
   const Category = useParams();
   const [data, setData] = useState([]);
+  const [index,setIndex] = useState(0);
+  const [dataSearch,setDataSearch] = useState([]);
   // const [state,setState]= useState("");
   function handleClick(id){
     axios.get(`http://localhost:8080/${Category.category}?category_id=${id}`).then(res=>{
@@ -32,12 +37,17 @@ function CategoryPage() {
   }
   useEffect(() => {
     axios.get(`http://localhost:8080/${Category.category}`).then(res=>{
-      setData(res.data[0].Food_list);  
-      // console.log(res.data[0].Food_list);
+      setData(res.data[0].Food_list); 
+      setDataSearch(res.data);
       }).catch(err=>console.log(err));
-      // console.log(data);
-  }
+      if(id !== null){
+        dataSearch && dataSearch.forEach((ele,i)=>{
+           ele._id == id ?console.log("I is there"):console.log("not i");
+        })
+      }
+    }
   , [])
+  
 
   
   console.log(Category);
@@ -70,7 +80,7 @@ function CategoryPage() {
           </Tooltip1>
         </NameWrapper>
         <hr/>
-        <Categories handleClick ={handleClick} category={Category.category}/>
+        <Categories handleClick ={handleClick} query={index} category={Category.category}/>
         <Grid templateColumns='repeat(3, 1fr)' gap={6} mt={"50px"}>
           {
               data && data.map((ele,index)=>{
