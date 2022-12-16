@@ -7,11 +7,10 @@ import {
   MenuItem,
   List,
   ListItem,
-  Text,
-  Center,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
 import styles from "../css.Module/ShopByCat.module.css";
+import { Link } from "react-router-dom";
 const subcat = [
   [
     "Curry Cuts",
@@ -107,21 +106,24 @@ const Category = ({ cat }) => {
           <List>
             {cat.map((el, index) => (
               <ListItem>
-                <MenuItem
-                  className={styles.hvr}
-                  minH="48px"
-                  onMouseEnter={(e) => setInd(index)}
-                >
-                  <Image
-                    boxSize="2rem"
-                    borderRadius="full"
-                    src={el.img}
-                    alt="Fluffybuns the destroyer"
-                    mr="12px"
-                  />
+                <Link to={el.path}>
+                  {" "}
+                  <MenuItem
+                    className={styles.hvr}
+                    minH="48px"
+                    onMouseEnter={(e) => setInd(index)}
+                  >
+                    <Image
+                      boxSize="2rem"
+                      borderRadius="full"
+                      src={el.img}
+                      alt="Fluffybuns the destroyer"
+                      mr="12px"
+                    />
 
-                  <span>{el.title}</span>
-                </MenuItem>
+                    <span>{el.title}</span>
+                  </MenuItem>
+                </Link>
               </ListItem>
             ))}
           </List>

@@ -15,7 +15,7 @@ import Blogs from "../components/Blogs";
 import Footer from "../components/Footer";
 const Homepage = () => {
   return (
-    <Box backgroundColor="#F7F6F6">
+    <Box backgroundColor="#F7F6F6" width="100%">
       <Navbar />
       {/*................ Main Banner ...........................*/}
       <Box position="relative">
