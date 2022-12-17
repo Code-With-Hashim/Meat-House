@@ -1,19 +1,38 @@
 const express = require("express")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const multer = require("multer")
+const path = require('path')
+const cloudinary = require('cloudinary')
 
 const { User_Authenticated_Modals } = require("../../Modals/User_Authenticated.modals")
 const { User_cart_modals } = require("../../Modals/User_cart.modals")
 const { User_Address_Modal } = require("../../Modals/User_Address_Modals")
 const { authentication, ipMiddleware } = require("../../../Middlewares/Authenticated.Middlewares")
+const { dirname } = require("path")
 
 //SECRET_KEY 
+
+cloudinary.config({
+    cloud_name: 'djhktua3a',
+    api_key: '267842812239797',
+    api_secret: '_12w8hbAlsazWgZcWsFII5Z89FE'
+});
 
 const SECRET_KEY = process.env.SECRET_KEY
 
 const User_Authenticated_Router = express.Router()
 
 
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, '..', "User_Profile_Uploads"),
+
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
+const upload = multer({ storage: storage })
 
 
 User_Authenticated_Router.post("/signup", ipMiddleware, async (req, res) => {
@@ -55,9 +74,9 @@ User_Authenticated_Router.post("/signup", ipMiddleware, async (req, res) => {
 
 
 
-                        
-                        await User_cart_modals.insertMany([{ UserID : UserData._id }])
-                        await User_Address_Modal.insertMany([{ UserID : UserData._id }])
+
+                        await User_cart_modals.insertMany([{ UserID: UserData._id }])
+                        await User_Address_Modal.insertMany([{ UserID: UserData._id }])
 
                         res.status(201).send({
                             message: "User Created Successfully",
@@ -132,7 +151,7 @@ User_Authenticated_Router.post("/login", async (req, res) => {
     }
 })
 
-User_Authenticated_Router.patch("/updatedetail", authentication, async (req, res) => {
+User_Authenticated_Router.patch("/updatedetail", authentication, upload.single('avatar'), async (req, res) => {
 
     let { email, password, name, phoneNumber, gender, maritalStatus, UserID } = req.body
 
@@ -144,25 +163,48 @@ User_Authenticated_Router.patch("/updatedetail", authentication, async (req, res
     if (maritalStatus === "") maritalStatus = undefined
 
 
+
+
     try {
 
         const existingUser = await User_Authenticated_Modals.findOne({ _id: UserID })
 
         if (existingUser) {
-            await User_Authenticated_Modals.findByIdAndUpdate({ _id: UserID }, {
-                email,
-                phoneNumber,
-                name,
-                gender,
-                password,
-                maritalStatus,
 
-            })
+            if (req.file) {
+
+                const result = await cloudinary.uploader.upload(req.file.path);
+
+                await User_Authenticated_Modals.findByIdAndUpdate({ _id: UserID }, {
+                    profile_img: result.url,
+                    email,
+                    phoneNumber,
+                    name,
+                    gender,
+                    password,
+                    maritalStatus,
+
+                })
+            } else {
+
+                await User_Authenticated_Modals.findByIdAndUpdate({ _id: UserID }, {
+                    email,
+                    phoneNumber,
+                    name,
+                    gender,
+                    password,
+                    maritalStatus,
+
+                })
+
+
+            }
 
             res.status(200).send({
                 message: "Detail Udpdate Successfully",
                 status: "Success"
             })
+
         } else {
             res.status(401).send({
                 message: "Something went wrong please try again",
@@ -171,6 +213,7 @@ User_Authenticated_Router.patch("/updatedetail", authentication, async (req, res
         }
 
     } catch (error) {
+        console.log(error)
         res.status(404).send({
             message: "Something went wrong please try again",
             status: "Failed"
