@@ -21,7 +21,7 @@ const Address = () => {
                     <Button variant="outline"
                         colorScheme="red"
                         fontSize="20px"
-                        h="70px"
+                        
                         w="70%" >
                         <Link to="/newaddress">+ Add New Address</Link>
                     </Button>
@@ -42,11 +42,22 @@ const Address = () => {
 
                         </Box>
                     </Box>
-                    <Button padding="5px" textAlign="center" justifyContent="flex-start" display="flex " marginTop="20px" colorScheme="red" w="40%"><Link to="/summary">Proceed To Shipment</Link></Button>
+                    <Box >
+                    <Button 
+                     padding="5px"
+                      textAlign="center"
+                      className={sa.proceed}
+                      
+                        marginTop="20px"
+                         colorScheme="red"
+                          ><Link to="/summary">Proceed To Shipment</Link></Button>
+
+                    </Box>
+                    
                 </Box>
 
 
-                <Box >
+                <Box className={sa.progress} >
                 <Box   padding="20px" >
                 <Box alignItems="center" gap="20px" marginLeft="50px" display="flex" color="red.400" fontSize="20px" marginBottom="5px">
                     <  BsFillCircleFill />

@@ -3,7 +3,7 @@
     width: 80%;
     /* height: 495px; */
     margin: auto;
-    margin-top: 60px;
+    margin-top: 100px;
     display: flex;
 }
 .address_container{
@@ -13,4 +13,28 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 
 
+}
+.proceed{
+    font-size: 20px;
+}
+@media (max-width:850px){
+    .address{
+        width: 96%;
+
+    }
+   
+    
+
+}
+@media (max-width:550px){
+    .progress{
+        display: none;
+    }
+    .address_container{
+        width: 100%;
+        padding: 5px;
+    }
+    .proceed{
+        font-size: 16px;
+    }
 }

@@ -3,12 +3,12 @@
     width: 90%;
     /* height: 495px; */
     margin: auto;
-    margin-top: 60px;
+    margin-top: 100px;
     display: flex;
     background-color: #f7f6f6;
 }
 .address_container{
-    height: 100%;
+    height: auto;
     width: 60%;
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
@@ -24,3 +24,26 @@
     
     width: 50%;
  }
+ 
+ @media (max-width:850px){
+    .progress{
+        display: none;
+    }
+
+    .address{
+        width: 100%;
+    }
+    .address_container{
+        width: 100%;
+    }
+    
+   
+    
+
+}
+@media (max-width:550px){
+    .progress{
+        display: none;
+    }
+    
+}
