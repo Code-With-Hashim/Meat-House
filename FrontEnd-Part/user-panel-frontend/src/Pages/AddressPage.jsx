@@ -12,7 +12,7 @@ const Address = () => {
     return (
         <>
 
-            <Navbar />
+            
 
 
             <Box className={sa.address}  >

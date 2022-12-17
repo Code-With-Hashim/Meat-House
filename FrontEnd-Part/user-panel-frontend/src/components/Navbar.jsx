@@ -29,6 +29,7 @@ import { DrawerExample } from "./Login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/AuthReducer/Action";
+import Cart from "./Cart";
 
 let cat = [
   {
@@ -272,11 +273,12 @@ const Navbar = () => {
               />
               <Spacer />
               <Box display="flex" gap={2} cursor="pointer">
-                <Image
+                {/* <Image
                   boxSize="20px"
                   src="https://www.licious.in/img/rebranding/cart_icon.svg"
                   alt="."
-                />
+                /> */}
+                <Cart/>
                 <Text fontSize="xs">Cart</Text>
               </Box>
             </Hide>

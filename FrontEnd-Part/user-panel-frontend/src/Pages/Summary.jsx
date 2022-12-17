@@ -14,7 +14,7 @@ const Summary = () => {
     return (
         <>
 
-            <Navbar />
+            
 
 
             <Box className={sa.address}  >

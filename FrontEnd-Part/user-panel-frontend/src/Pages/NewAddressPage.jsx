@@ -11,7 +11,7 @@ const NewAddress = () => {
     return (
         <>
 
-        <Navbar/>
+       
             <Box className={sa.Address_container}>
                 <Box padding="20px" className={sa.children}>
                     <Text fontWeight="bold" textAlign="left" color="#CBCBCB" fontSize="20px">Add New Address</Text>

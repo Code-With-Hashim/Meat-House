@@ -52,33 +52,7 @@ const CartData = () => {
 
 
       </Box>
-      <Box className={sa.added_product}>
-        <Box display="flex" justifyContent="space-between">
-          <Box display="flex" gap="20px" >
-            <Text textAlign="center" boxSize="30px" backgroundColor="#f2f2f2" fontSize="16px">1</Text>
-            <Text fontWeight="bold" fontSize="16px" color="black">Chicken Curry Cut large </Text>
-
-
-          </Box>
-          <Box><RxCross1 /></Box>
-        </Box>
-        <Box display="flex" justifyContent="space-between">
-          <Box display="flex" gap="10px" marginLeft="50px">
-            <Text color="blackAlpha.700" borderRadius="5px" padding="0px 10px 0px 10px" height="fit-content" border="1px solid black" fontSize="14px">500gms</Text>
-            <Text color="#d11243" alignItems="baseline" justifyContent="center" display="flex"><BiRupee fontSize="13px" />322</Text>
-            <Text color="blackAlpha.600" alignItems="baseline" display="flex" textDecoration="line-through"><BiRupee fontSize="13px" />200</Text>
-          </Box>
-          <Box justifyItems="center" gap="2px" display="flex">
-
-            <Button boxSize="20px">-</Button>
-            <Text>1</Text>
-            <Button boxSize="20px">+</Button>
-          </Box>
-        </Box>
-        <hr />
-
-
-      </Box>
+      
     </>
   )
 }
@@ -110,38 +84,8 @@ const CartAdd = () => {
     <>
       <Box padding="5px"><Text>You May Want To Try</Text></Box>
       <Box className={sa.product_cart} w="100%">
-        <Box h="235px" w="166px">
-          <Box position="relative" textAlign="center" >
-            <Image src='https://dao54xqhg9jfa.cloudfront.net/OMS-ProductMerchantdising/4090ccb0-40d0-43b0-3402-0d5eea1d9383/original/Chicken-Leg-Curry-Cut-(Large---4-pieces)-Hero-Shot_(1).jpg' />
-            <Text border="1px solid red" padding='3px' fontSize="12px" backgroundColor="white" color="red" left="120px" top="2px" position="absolute">5 %Off</Text>
-
-          </Box>
-          <Text marginTop="10px" fontSize="13px" color="black">Chicken Leg Curry Cut - Medium Pieces</Text>
-          <Box marginTop="10px" fontSize="13px" gap="10px" display="flex">
-            <Text borderRight="1px solid grey" paddingRight="20px"  >300gms</Text>
-            <Text alignItems="center" display="flex"><BiRupee />150</Text>
-            <Text textDecoration="line-through" alignItems="center" display="flex" ><BiRupee />180</Text>
-          </Box>
-          <Button marginTop="5px" size="sm" colorScheme='red' variant='outline'>
-            ADD
-          </Button>
-        </Box>
-        <Box h="235px" w="166px">
-          <Box position="relative" textAlign="center" >
-            <Image src='https://dao54xqhg9jfa.cloudfront.net/OMS-ProductMerchantdising/4090ccb0-40d0-43b0-3402-0d5eea1d9383/original/Chicken-Leg-Curry-Cut-(Large---4-pieces)-Hero-Shot_(1).jpg' />
-            <Text border="1px solid red" padding='3px' fontSize="12px" backgroundColor="white" color="red" left="120px" top="2px" position="absolute">5 %Off</Text>
-
-          </Box>
-          <Text marginTop="10px" fontSize="13px" color="black">Chicken Leg Curry Cut - Medium Pieces</Text>
-          <Box marginTop="10px" fontSize="13px" gap="10px" display="flex">
-            <Text borderRight="1px solid grey" paddingRight="20px"  >300gms</Text>
-            <Text alignItems="center" display="flex"><BiRupee />150</Text>
-            <Text textDecoration="line-through" alignItems="center" display="flex" ><BiRupee />180</Text>
-          </Box>
-          <Button marginTop="5px" size="sm" colorScheme='red' variant='outline'>
-            ADD
-          </Button>
-        </Box>
+        
+       
         <Box h="235px" w="166px">
           <Box position="relative" textAlign="center" >
             <Image src='https://dao54xqhg9jfa.cloudfront.net/OMS-ProductMerchantdising/4090ccb0-40d0-43b0-3402-0d5eea1d9383/original/Chicken-Leg-Curry-Cut-(Large---4-pieces)-Hero-Shot_(1).jpg' />
@@ -229,9 +173,9 @@ function DrawerExample() {
 
   return (
     <>
-      <Button ref={btnRef} colorScheme='red' onClick={onOpen}>
-        <BsCart2 />
-      </Button>
+      
+        <Image ref={btnRef}  onClick={onOpen} src='https://www.licious.in/img/rebranding/cart_icon.svg'/>
+      
       <Drawer
         isOpen={isOpen}
         placement='right'

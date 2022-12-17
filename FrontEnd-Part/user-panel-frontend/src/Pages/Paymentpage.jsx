@@ -17,7 +17,7 @@ const Paymentpage = () => {
     <Box>
         <>
 
-<Navbar />
+
 
 
 <Box className={sa.address}  >
