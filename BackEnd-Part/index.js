@@ -2,6 +2,8 @@ require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
 
+
+
 const { connect } = require('./config/db')
 const { Chicken_Collection_Routes } = require("./User-Panel-Backend/routes/Food_Collection_Routes/Chicken_collection_Routes")
 const { Mutton_Collection_Routes } = require("./User-Panel-Backend/routes/Food_Collection_Routes/Mutton_collection_Routes")
@@ -21,9 +23,12 @@ const app = express()
 const PORT = 8080
 
 app.use(express.json())
+// app.use(express.urlencoded({ extended: true }))
 app.use(cors({
     origin : "*"
 }))
+
+
 
 // Food Collection ---Routes
 app.use("/Chicken", Chicken_Collection_Routes)
@@ -48,10 +53,11 @@ app.use("/admin/recycle"  , admin_product_recyle_routes)
 app.use("/admin/userdetail" , admin_userlist_routes) 
 
 
-
 app.get("/", (req, res) => {
-    res.send('Welcome to Product collection')
+    
 })
+
+
 
 app.listen(PORT, async () => {
     try {

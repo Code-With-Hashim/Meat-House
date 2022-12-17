@@ -1,5 +1,25 @@
 const express = require('express')
 const uniqid = require('uniqid')
+const multer = require('multer')
+const cloudinary = require('cloudinary')
+const path = require('path')
+
+
+cloudinary.config({
+    cloud_name: 'djhktua3a',
+    api_key: '267842812239797',
+    api_secret: '_12w8hbAlsazWgZcWsFII5Z89FE'
+});
+
+const storage = multer.diskStorage({
+    destination: path.join(__dirname, '..' , 'Product_image_upload'),
+
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
+const upload = multer({ storage: storage })
 
 
 const { Chicken_Collection_modal } = require("../../modals/Chicken_collection.modals")
@@ -94,6 +114,7 @@ admin_product_routes.get("/:id", async (req, res) => {
 
     const { id } = req.params
 
+    
     const { AdminID } = req.body
 
     try {
@@ -401,10 +422,13 @@ admin_product_routes.patch("/:id", async (req, res) => {
     }
 })
 
-admin_product_routes.post("/create", async (req, res) => {
+admin_product_routes.post("/create", upload.single('product_img') , async (req, res) => {
+
+
+    
+
     const { category_id } = req.query
     const {
-        product_image_src,
         product_name,
         item_desc,
         net_weight,
@@ -414,31 +438,122 @@ admin_product_routes.post("/create", async (req, res) => {
         AdminID
     } = req.body
 
+    console.log(category_id)
+
     try {
 
         const isValidAdmin = await Admin_authenticated_modal.findOne({ _id: AdminID })
 
         if (isValidAdmin) {
 
-            const ChickenList = await Chicken_Collection_modal.findOne({ _id: category_id })
+            const result = await cloudinary.uploader.upload(req.file.path);
 
-            const isUpdate = await Chicken_Collection_modal.updateOne({ _id: ChickenList._id }, {
+            
+           
+
+            let isProductexist;
+
+
+            if(isProductexist === null || isProductexist === undefined) {
+                isProductexist = await Chicken_Collection_modal.findOne({ _id: category_id })
+            } else if (isProductexist === null || isProductexist === undefined) {
+
+                isProductexist = await Eggs_Collection_modal.findOne({ _id: category_id })
+
+            } else if (isProductexist === null || isProductexist === undefined) {
+                
+                isProductexist = await Marindas_Collection_modal.findOne({ _id: category_id })
+
+            } else if (isProductexist === null || isProductexist === undefined) {
+
+                isProductexist = await Prawns_Collection_modal.findOne({ _id: category_id })
+                
+            } else if (isProductexist === null || isProductexist === undefined) {
+
+                isProductexist = await Mutton_Collection_modal.findOne({ _id: category_id })
+                
+            }
+            
+
+            var isUpdate = await Chicken_Collection_modal.updateOne({ _id: isProductexist._id }, {
                 $push: {
                     "Food_list": {
                         product_id: uniqid(),
-                        product_image_src,
+                        product_image_src : result.url,
                         product_name,
                         item_desc,
                         net_weight,
                         rupee,
                         price,
                         offer_discount,
-                        add_to_cart : "Add To Cart" ,
+                        add_to_cart: "Add To Cart",
+                    }
+                }
+            })
+            var isUpdate = await Marindas_Collection_modal.updateOne({ _id: isProductexist._id }, {
+                $push: {
+                    "Food_list": {
+                        product_id: uniqid(),
+                        product_image_src : result.url,
+                        product_name,
+                        item_desc,
+                        net_weight,
+                        rupee,
+                        price,
+                        offer_discount,
+                        add_to_cart: "Add To Cart",
+                    }
+                }
+            })
+            var isUpdate = await Mutton_Collection_modal.updateOne({ _id: isProductexist._id }, {
+                $push: {
+                    "Food_list": {
+                        product_id: uniqid(),
+                        product_image_src : result.url,
+                        product_name,
+                        item_desc,
+                        net_weight,
+                        rupee,
+                        price,
+                        offer_discount,
+                        add_to_cart: "Add To Cart",
+                    }
+                }
+            })
+            var isUpdate = await Prawns_Collection_modal.updateOne({ _id: isProductexist._id }, {
+                $push: {
+                    "Food_list": {
+                        product_id: uniqid(),
+                        product_image_src : result.url,
+                        product_name,
+                        item_desc,
+                        net_weight,
+                        rupee,
+                        price,
+                        offer_discount,
+                        add_to_cart: "Add To Cart",
+                    }
+                }
+            })
+            var isUpdate = await Eggs_Collection_modal.updateOne({ _id: isProductexist._id }, {
+                $push: {
+                    "Food_list": {
+                        product_id: uniqid(),
+                        product_image_src : result.url,
+                        product_name,
+                        item_desc,
+                        net_weight,
+                        rupee,
+                        price,
+                        offer_discount,
+                        add_to_cart: "Add To Cart",
                     }
                 }
             })
 
-            res.send(isUpdate)
+            res.send({
+                message : 'Product has been added Successfully'
+            })
 
 
         } else {
@@ -449,7 +564,7 @@ admin_product_routes.post("/create", async (req, res) => {
 
 
     } catch (error) {
-
+        res.send('Something went wrong')
     }
 
 
