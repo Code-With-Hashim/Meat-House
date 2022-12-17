@@ -78,19 +78,34 @@ admin_product_routes.get("/", async (req, res) => {
 
                     [
                         {
-                            chicken_category
+                            product_img_src : "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/34466dbd-a515-edd1-3e99-05000f217cb6/original/Chicken_(2).png",
+                            category_name : "Chicken",
+                            category_id : "9lc7t96i4lbsdmt18",
+                            foodCategory : chicken_category
                         },
                         {
-                            eggs_category
+                            product_img_src : "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/1bd08fae-c971-390a-ce8a-6f6502f5bd0d/original/Eggs_(1).png",
+                            category_name : "Eggs",
+                            category_id : "9lc7t96i4lbsdmt19",
+                            foodCategory : eggs_category
                         },
                         {
-                            marindas_category
+                            product_img_src : "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/21653c3a-4d6d-da71-2432-6833b88e9629/original/RC.png",
+                            category_name : "Ready to Cook",
+                            category_id : "9lc7t96i4lbsdmt1a",
+                            foodCategory : marindas_category
                         },
                         {
-                            mutton_category
+                            product_img_src : "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/3a3d173d-5537-dafc-0be4-dec0791dcd24/original/MUT.png",
+                            category_name : "Muttons",
+                            category_id : "9lc7t96i4lbsdmt1b",
+                            foodCategory : mutton_category
                         },
                         {
-                            prawns_category
+                            product_img_src : "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/f4053965-f199-80a0-2551-d85d712574e2/original/Prawn_(2).png",
+                            category_name : "Prawns",
+                            category_id : "9lc7t96i4lbsdmt1c",
+                            foodCategory : prawns_category
                         }
                     ]
 
