@@ -58,7 +58,7 @@ const Summary = () => {
                             </Box>
                         </Box>
                         <Box justifyContent="left" display="grid">
-                        <Button colorScheme='red' >Proceed to Payment</Button>
+                        <Button colorScheme='red' ><Link to="/payment">Proceed to Payment</Link></Button>
                         </Box>
                         
 

@@ -1,0 +1,26 @@
+
+.address{
+    width: 90%;
+    /* height: 495px; */
+    margin: auto;
+    margin-top: 60px;
+    display: flex;
+    background-color: #f7f6f6;
+}
+.address_container{
+    height: 100%;
+    width: 60%;
+    padding: 20px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    display: flex;
+}
+.payment{
+   border-right: 1px solid grey; 
+   cursor: pointer;
+   
+   width: 30%;
+}
+.payment1{
+    
+    width: 50%;
+ }
