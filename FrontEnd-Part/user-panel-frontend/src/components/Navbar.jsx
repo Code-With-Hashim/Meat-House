@@ -132,7 +132,7 @@ const Navbar = () => {
       <Box
         width="100%"
         // border="1px solid"
-        position="sticky"
+        position="fixed"
         top="0"
         backgroundColor="white"
         zIndex="1000"

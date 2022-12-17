@@ -81,7 +81,7 @@ const Paymentpage = () => {
                 <Text fontSize="15px">Other Wallets</Text>
                 <hr />
             </Box>
-            <Box padding="5px" fontWeight="bold"
+            <Box borderRight="5px solid green" padding="5px" fontWeight="bold"
             gap="20px"
             flexDirection="column"
              display="flex" textAlign="left" >
@@ -100,40 +100,10 @@ const Paymentpage = () => {
         
         </Box>
         <Box className={sa.payment1}>
+
             <Text fontWeight="bold" fontSize="25px">Cash On Delivery</Text>
-            <Image src="https://www.licious.in/img/rebranding/Cash_on_delivery.png"/>
-            <Button colorScheme="red">Place Order</Button>
-
-            
-        </Box>
-
-
-    </Box>
-
-
-    <Box >
-        <Box padding="20px" >
-            <Box alignItems="center" gap="20px" marginLeft="50px" display="flex" color="green" fontSize="20px" marginBottom="5px">
-                <  AiFillCheckCircle />
-                <Text color="black">Choose Address</Text>
-            </Box>
-            <Box marginLeft="57.5px" borderLeft="3px solid #008000" h="110px"></Box>
-            <Box alignItems="center" gap="20px" marginLeft="50px" display="flex" color="green" fontSize="20px" marginBottom="5px">
-                <  AiFillCheckCircle />
-                <Text color="black">Delivery Summary</Text>
-            </Box>
-            <Box marginLeft="57.5px" borderLeft="3px solid #008000" h="110px"></Box>
-            <Box alignItems="center" gap="20px" marginLeft="50px" display="flex" color="red" fontSize="20px" marginBottom="5px">
-                <  BsFillCircleFill />
-                <Text color="#CBCBCB">Payment Method</Text>
-            </Box>
-
-
-
-
-        </Box>
-        <Box marginLeft="70px">
-        <Box padding="10px"    width="100%">
+            <Box marginLeft="0px">
+        <Box margin="auto" padding="10px" border="1px dashed green" borderRadius="10px"   width="100%">
         <Text fontWeight="black" fontSize="20px">BILL DETAILS</Text>
         <Box gap="10px" flexDirection="column" display="flex" justifyContent="space-between" >
           <Box fontSize="16px" justifyContent="space-between" display="flex">
@@ -158,6 +128,40 @@ const Paymentpage = () => {
         </Box>
       </Box>
         </Box>
+            <Image src="https://www.licious.in/img/rebranding/Cash_on_delivery.png"/>
+            <Button colorScheme="red">Place Order</Button>
+
+            
+        </Box>
+
+
+    </Box>
+
+
+    <Box >
+        <Box className={sa.progress} padding="20px" >
+            <Box alignItems="center" gap="20px" marginLeft="50px" display="flex"  marginBottom="5px">
+            <Text  fontSize="20px" color="green"><  AiFillCheckCircle /></Text>
+                <Text  fontSize="20px" color="black">Choose Address</Text>
+                <Link to="/address"><Text color="red">(change) </Text></Link>
+            </Box>
+            <Box marginLeft="57.5px" borderLeft="3px solid #008000" h="110px"></Box>
+            <Box alignItems="center" gap="20px" marginLeft="50px" display="flex"   marginBottom="5px">
+            <Text  fontSize="20px" color="green"><  AiFillCheckCircle /></Text>
+                <Text fontSize="20px" color="black">Delivery Summary</Text>
+                <Link to="/summary"><Text color="red">(edit) </Text></Link>
+            </Box>
+            <Box marginLeft="57.5px" borderLeft="3px solid #008000" h="110px"></Box>
+            <Box alignItems="center" gap="20px" marginLeft="50px" display="flex" color="red" fontSize="20px" marginBottom="5px">
+                <  BsFillCircleFill />
+                <Text color="#CBCBCB">Payment Method</Text>
+            </Box>
+
+
+
+
+        </Box>
+        
        
     </Box>
 

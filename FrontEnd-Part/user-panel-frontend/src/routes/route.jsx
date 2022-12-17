@@ -8,6 +8,7 @@ import NewAddress from "../Pages/NewAddressPage";
 import Address from "../Pages/AddressPage";
 import Summary from "../Pages/Summary";
 import Paymentpage from "../Pages/Paymentpage";
+import CartPage from "../Pages/CartPage";
 
 function Router() {
   return (
@@ -27,6 +28,8 @@ function Router() {
        <Route path="/address"  element={<Address/>}></Route>
        <Route path="/summary"  element={<Summary/>}></Route>
        <Route path="/payment"  element={<Paymentpage/>}></Route>
+       <Route path="/cart"  element={<CartPage/>}></Route>
+
        
       </Routes>
       

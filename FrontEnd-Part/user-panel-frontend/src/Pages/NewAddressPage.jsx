@@ -21,8 +21,8 @@ const NewAddress = () => {
                         <hr />
                     </Box>
                     <Box textAlign="left">
-                        <Text color="#CBCBCB" fontSize="14px">Flat No/Building Name/Street Name</Text>
-                        <Input variant='flushed' placeholder='Flat No/Building Name/Street Name' size='lg' />
+                        <Text color="#CBCBCB" fontSize="14px">Flat No/Building Name</Text>
+                        <Input variant='flushed' placeholder='Flat No/Building Name' size='lg' />
                         <hr />
                     </Box>
                     <Box textAlign="left">
@@ -56,7 +56,7 @@ const NewAddress = () => {
 
 
                 </Box>
-                <Box   padding="20px" >
+                <Box className={sa.progress}  padding="20px" >
                 <Box alignItems="center" gap="20px" marginLeft="50px" display="flex" color="red.400" fontSize="20px" marginBottom="5px">
                     <  BsFillCircleFill />
                     <Text color="black">Choose Address</Text>
@@ -83,6 +83,7 @@ const NewAddress = () => {
 
             </Box>
             <Footer/>
+            
         </>
     )
 }
