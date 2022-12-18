@@ -29,69 +29,18 @@ import { DrawerExample } from "./Login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/AuthReducer/Action";
-
-let cat = [
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/34466dbd-a515-edd1-3e99-05000f217cb6/original/Chicken_(2).png",
-    title: "Chicken",
-    path: "/chicken",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/caac432f-545f-f03f-ce10-3b911916da70/original/FIsh_(1).png",
-    title: "Fish & Seafood",
-    path: "/fish",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/3a3d173d-5537-dafc-0be4-dec0791dcd24/original/MUT.png",
-    title: "Mutton",
-    path: "/mutton",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/21653c3a-4d6d-da71-2432-6833b88e9629/original/RC.png",
-    title: "Ready to cook",
-    path: "/readytocook",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/f4053965-f199-80a0-2551-d85d712574e2/original/Prawn_(2).png",
-    title: "Prawns",
-    path: "/prawns",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/49a8dd0c-7254-0b89-b348-b57281c76f5a/original/Coldcuts_(2).png",
-    title: "Cold Cuts",
-    path: "/coldcuts",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/d9a97969-ebd7-977c-e676-b343a18d7318/original/SPD.png",
-    title: "Spreads",
-    path: "/spreads",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/1bd08fae-c971-390a-ce8a-6f6502f5bd0d/original/Eggs_(1).png",
-    title: "Eggs",
-    path: "/eggs",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/0b7ccd0f-0811-c38b-5420-0317c8006bda/original/Biryani_(2).png",
-    title: "Biryani & Kebab",
-    path: "/biryani&kebab",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/66e49926-d949-dfb3-2e79-8052d07f0a3b/original/PBM_6_(8).png",
-    title: "Plant Based Meat",
-    path: "/plantbasedmeat",
-  },
-  {
-    img: "https://dao54xqhg9jfa.cloudfront.net/OMS-Category/3f37d093-81cf-3c66-115a-2a4575420d68/original/Masala_1200x840_web.png",
-    title: "Meat Masala",
-    path: "/meatmasala",
-  },
-];
+import { getData } from "../redux/AppReducer/Action";
+import Cart from "./Cart";
+import { cat } from "../Utils/Constants";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-  const [loc, setLoc] = useState("" || "Delhi");
+  // const [loc, setLoc] = useState("" || "Delhi");
   const [city, setCity] = useState();
   // const [isAuth, setIsAuth] = useState(false);
+
+  const city1 = useSelector((store) => store.AppReducer.city);
+
   const isAuth = useSelector((store) => store.AuthReducer.isAuth);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -103,11 +52,13 @@ const Navbar = () => {
     );
     promis.json().then((res) => {
       console.log(res.location.name);
-      setLoc(res.location.name);
+      // setLoc(res.location.name);
+      dispatch(getData(res.location.name));
     });
   };
   const error = () => {
-    setLoc(city);
+    // setLoc(city);
+    dispatch(getData("Delhi"));
   };
   // const getuser = () => {
   //   if (to != undefined) {
@@ -116,22 +67,29 @@ const Navbar = () => {
   // };
   const handleChange = (e) => {
     setCity(e.target.value);
-    setLoc(e.target.value);
+    // setLoc(e.target.value);
   };
-
+  const handleCity = (e) => {
+    dispatch(getData(city));
+  };
   let to = localStorage.getItem("token");
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(success, error);
+  useEffect(
+    () => {
+      navigator.geolocation.getCurrentPosition(success, error);
 
-    // getuser();
-  }, [setLoc, setCity]);
+      // getuser();
+    },
+    [
+      // setLoc, setCity
+    ]
+  );
 
   return (
     <>
       <Box
         width="100%"
         // border="1px solid"
-        position="sticky"
+        position="fixed"
         top="0"
         backgroundColor="white"
         zIndex="1000"
@@ -140,12 +98,14 @@ const Navbar = () => {
         <Box mx="8%">
           <Flex alignItems="center">
             {/* <Box> */}
-            <Image
-              cursor="pointer"
-              boxSize="80px"
-              src={MeatHouseLogo}
-              alt="MeatHouse"
-            />
+            <Link to="/">
+              <Image
+                cursor="pointer"
+                boxSize="80px"
+                src={MeatHouseLogo}
+                alt="MeatHouse"
+              />
+            </Link>
             {/* </Box> */}
             <Spacer />
 
@@ -156,7 +116,7 @@ const Navbar = () => {
                 alt="."
               />
               <Text fontSize="xs" cursor="pointer">
-                {loc}
+                {city1}
               </Text>
               <Menu closeOnSelect={false}>
                 <MenuButton>
@@ -176,8 +136,13 @@ const Navbar = () => {
                         <Input
                           placeholder="Enter your locality"
                           onChange={handleChange}
+                          paddingRight="10px"
                         />
-                        <InputRightElement children={<Button>Submit</Button>} />
+                        <InputRightElement
+                          children={
+                            <Button onClick={handleCity}>Submit</Button>
+                          }
+                        />
                       </InputGroup>
                     </Box>
                   </Box>
@@ -272,11 +237,12 @@ const Navbar = () => {
               />
               <Spacer />
               <Box display="flex" gap={2} cursor="pointer">
-                <Image
+                {/* <Image
                   boxSize="20px"
                   src="https://www.licious.in/img/rebranding/cart_icon.svg"
                   alt="."
-                />
+                /> */}
+                <Cart />
                 <Text fontSize="xs">Cart</Text>
               </Box>
             </Hide>
@@ -328,7 +294,8 @@ const Navbar = () => {
                   <MenuButton>
                     <Text fontSize="xs">Categories</Text>
                   </MenuButton>
-                  <MenuList width="500px">
+                  <Category cat={cat} />
+                  {/* <MenuList width="500px">
                     <List>
                       <ListItem>
                         <MenuItem minH="48px">
@@ -355,7 +322,7 @@ const Navbar = () => {
                         </MenuItem>
                       </ListItem>
                     </List>
-                  </MenuList>
+                  </MenuList> */}
                 </Menu>
               </Box>
               <Spacer />

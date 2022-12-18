@@ -15,7 +15,7 @@ import Blogs from "../components/Blogs";
 import Footer from "../components/Footer";
 const Homepage = () => {
   return (
-    <Box backgroundColor="#F7F6F6" width="100%">
+    <Box backgroundColor="#F7F6F6" width="100%" mt="80px">
       {/* <Navbar /> */}
       {/*................ Main Banner ...........................*/}
       <Box position="relative">
@@ -32,7 +32,7 @@ const Homepage = () => {
           paddingLeft="7%"
           paddingRight="7%"
         >
-          <Box
+          {/* <Box
             bg="white"
             boxSize="3rem"
             transform="rotate(180deg)"
@@ -46,8 +46,8 @@ const Homepage = () => {
                 alt="."
               />
             }
-          ></Box>
-          <Box
+          ></Box> */}
+          {/* <Box
             bg="white"
             boxSize="3rem"
             borderRadius="50%"
@@ -60,7 +60,7 @@ const Homepage = () => {
                 alt="."
               />
             }
-          ></Box>
+          ></Box> */}
         </Box>
       </Box>
       {/*................ Main Banner End ...........................*/}
@@ -133,7 +133,7 @@ const Homepage = () => {
         </Box>
       </Box>
 
-      <MultipleItems />
+      <MultipleItems  />
 
       <ShopByCat title={"Explore By Category"} />
       <Blogs />

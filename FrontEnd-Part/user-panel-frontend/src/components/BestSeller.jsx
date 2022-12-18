@@ -14,7 +14,9 @@ import {
 
 import React, { Component } from "react";
 import Slider from "react-slick";
-const array = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+import { bestcat } from "../Utils/Constants";
+
+
 export default class MultipleItems extends Component {
   render() {
     const settings = {
@@ -32,23 +34,21 @@ export default class MultipleItems extends Component {
               Best Seller
             </Heading>
             <Slider {...settings}>
-              {array.map((el) => (
-                <Card maxW="sm">
+              {bestcat.map((el) => (
+                <Card maxW="sm" padding="10px">
                   <CardBody>
                     <Image
-                      src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                      src={el.product_image_src}
                       alt="Green double couch with wooden legs"
                       borderRadius="lg"
                     />
                     <Stack mt="6" spacing="3">
-                      <Heading size="md">Living room Sofa</Heading>
-                      <Text>
-                        This sofa is perfect for modern tropical spaces, baroque
-                        inspired spaces, earthy toned spaces and for people who
-                        love a chic design with a sprinkle of vintage design.
-                      </Text>
+                      <Heading size="md">
+                        {el.product_name.slice(0, 30)}
+                      </Heading>
+                      <Text>{el.item_desc.slice(1, 40)}</Text>
                       <Text color="blue.600" fontSize="2xl">
-                        $450
+                        {el.rupee}
                       </Text>
                     </Stack>
                   </CardBody>
@@ -56,9 +56,6 @@ export default class MultipleItems extends Component {
                   <CardFooter>
                     <ButtonGroup spacing="2">
                       <Button variant="solid" colorScheme="blue">
-                        Buy now
-                      </Button>
-                      <Button variant="ghost" colorScheme="blue">
                         Add to cart
                       </Button>
                     </ButtonGroup>
