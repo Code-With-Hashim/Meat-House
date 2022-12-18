@@ -1,43 +1,41 @@
-import { Box, Divider, CardFooter, ButtonGroup, Button, CardBody, Image, Stack, Heading, GridItem, Card, Grid, Flex, Text } from "@chakra-ui/react"
+import {
+    Box, Divider, CardFooter, ButtonGroup, Button, CardBody, Image, Stack, Heading, GridItem, Card, Grid, Flex, Text, Tabs, TabList, Tab, TabPanels, TabPanel, useDisclosure, Modal, ModalOverlay,
+    ModalContent,
+    ModalHeader,
+    ModalCloseButton,
+    ModalBody,
+    ModalFooter,
+    useToast
+} from "@chakra-ui/react"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { useParams, useSearchParams } from "react-router-dom"
 import { AdminNavbar } from "../../Components/Navbar"
+import { category, getAllProduct } from "../../redux/Products/Products.action"
 
-
-const getSingleCategory = async (token) => {
-    try {
-
-        const res = await axios.get(`${process.env.REACT_APP_ADMIN_BASE_URL}products`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-
-        const { data } = res
-
-        return data
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
-}
 
 export const SingleCategory = () => {
-    const [singleCategory, setSingleCategory] = useState()
     const token = useSelector(({ auth }) => auth.token) || localStorage.getItem('admin_token')
     const { id } = useParams()
+    const toast = useToast()
+    const singleCategory = useSelector(({ product }) => product.data)
+    const singleId = useSelector(({ product }) => product.category_id)
+    const [product_id, setProductId] = useState()
+    const [foodDataList, setFoodDataList] = useState([])
+    const { isOpen, onOpen, onClose } = useDisclosure()
+    const dispatch = useDispatch()
+    const [searchParams, setSearchParams] = useSearchParams()
 
     useEffect(() => {
+        dispatch(getAllProduct(token))
+        setSearchParams({ category_id: singleId })
 
-        getSingleCategory(token).then((res) => setSingleCategory(res))
+    }, [singleId])
 
-    }, [])
+    // useEffect(() => {
 
-
+    // },[])
 
     const singleCategoryData = singleCategory && singleCategory.filter((i) => {
         if (id == i.category_id) {
@@ -45,33 +43,142 @@ export const SingleCategory = () => {
         }
     })
 
-
-    if (singleCategoryData && singleCategoryData) {
-        console.log(singleCategoryData[0])
+    if (singleCategoryData && singleCategoryData[0]) {
+        dispatch(category(singleCategoryData[0].foodCategory[0]._id))
     }
+
+
+
+    const handleFoodList = async (id) => {
+
+        const foodData = await axios.get(`${process.env.REACT_APP_ADMIN_BASE_URL}products/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+        dispatch(category(id))
+        setFoodDataList(foodData.data.Food_list)
+    }
+
+
+
+    useEffect(() => {
+
+        singleCategoryData && singleCategoryData[0] && axios.get(`${process.env.REACT_APP_ADMIN_BASE_URL}products/${singleId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
+            .then((res) => setFoodDataList(res.data.Food_list))
+            .catch((err) => console.log(err))
+
+    }, [product_id])
+
+    const handleDelete = async () => {
+        try {
+
+            let data = await axios.delete(`${process.env.REACT_APP_ADMIN_BASE_URL}products/${product_id}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            toast({
+                position: 'top',
+                variant: 'subtle',
+                title: `Item Delete Successfully`,
+                status: 'error',
+                isClosable: true,
+            })
+            setProductId(null)
+            onClose()
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const handelId = (id) => {
+
+        setProductId(id)
+        onOpen()
+
+    }
+
+
+
+    console.log(foodDataList)
 
     return (
         <Box>
             <AdminNavbar />
 
 
+            {
+                singleCategoryData && singleCategoryData[0] && <Heading>{singleCategoryData[0].category_name}</Heading>
+            }
+            <Tabs isLazy margin={'auto'} defaultIndex={0}>
+                <TabList >
+                    {
+                        singleCategoryData && singleCategoryData[0] && singleCategoryData[0].foodCategory.map((i) => (
+                            <Tab onClick={() => handleFoodList(i._id)}>{i.Category_List}</Tab>
+                        ))
+                    }
+                </TabList>
+                <TabPanels >
+                    <Grid templateColumns={'repeat(4,1fr)'} gap='5'>
+                        {
+                            foodDataList && foodDataList.map((i) => (
+                                <Card maxW='sm'>
+                                    <CardBody>
+                                        <Image
+                                            src={i.product_image_src}
+                                            borderRadius='lg'
+                                        />
+                                        <Stack mt='6' spacing='3'>
+                                            <Heading size='md'>{i.product_name}</Heading>
+                                            <Text>
+                                                {i.item_desc}
+                                            </Text>
+                                        </Stack>
+                                    </CardBody>
+                                    <Divider />
+                                    <CardFooter>
+                                        <ButtonGroup spacing='2'>
+                                            <Button variant='solid' colorScheme='green'>
+                                                Update
+                                            </Button>
+                                            <Button onClick={() => handelId(i.product_id)} variant='ghost' colorScheme='red'>
+                                                Delete
+                                            </Button>
+                                        </ButtonGroup>
+                                    </CardFooter>
+                                </Card>
+                            ))
+                        }
+                    </Grid>
+                </TabPanels>
+            </Tabs>
+            <Modal isOpen={isOpen} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Delete Item</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        Are you Sure you want to Delete this Item
+                    </ModalBody>
 
-            <Stack direction={'column'} gap={6} w='50%' m='auto'>
-                {
-                    singleCategoryData && <Heading>{singleCategoryData[0].category_name}</Heading>
-                }
-                {
-                    singleCategoryData && singleCategoryData[0].foodCategory.map((i) => (
-                        <Flex alignItems={'center'} justifyContent='space-around'>
-                            <Image w='10%' src={i.img_container_src} />
-                            <Text>{i.Category_List} Collection </Text>
-                            <Button>See Collection</Button>
-                        </Flex>
-                    ))
-                }
-            </Stack>
+                    <ModalFooter>
+                        <Button colorScheme='green' mr={3} onClick={onClose}>
+                            Close
+                        </Button>
+                        <Button onClick={handleDelete} colorScheme={'red'} variant='ghost'>Delete</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
 
-        </Box>
+        </Box >
     )
 }
 

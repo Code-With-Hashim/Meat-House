@@ -66,7 +66,7 @@ export const AdminDashboard = () => {
                             </CardBody>
 
                             <CardFooter>
-                                <Button onClick={() => Navigate("./User List")} variant='solid' colorScheme='blue'>
+                                <Button onClick={() => Navigate("./Multi User")} variant='solid' colorScheme='blue'>
                                     Know More
                                 </Button>
                             </CardFooter>

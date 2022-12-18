@@ -7,6 +7,21 @@ const { authentication } = require("../../../Middlewares/Authenticated.Middlewar
 
 User_Address_Router.use(authentication)
 
+User_Address_Router.get("/", async (req, res) => {
+
+
+    try {
+
+        const Address_list = await User_Address_Modal.findOne({ UserID: UserID })
+
+        res.send(Address_list)
+
+    } catch (error) {
+
+    }
+
+})
+
 User_Address_Router.post("/", async (req, res) => {
 
     const { fetchLocation, address, UserID } = req.body

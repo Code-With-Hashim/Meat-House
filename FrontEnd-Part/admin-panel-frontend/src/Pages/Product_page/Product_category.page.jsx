@@ -1,39 +1,22 @@
 import { Box, Button, Card, CardBody, CardHeader, Heading, Text, CardFooter, Image, Stack, Divider, ButtonGroup, Grid, GridItem } from "@chakra-ui/react"
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { AdminNavbar } from "../../Components/Navbar"
+import { getAllProduct } from "../../redux/Products/Products.action"
 
-const getAllProduct = async (token) => {
-    try {
-
-        const res = await axios.get(`${process.env.REACT_APP_ADMIN_BASE_URL}products`, {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
-
-        const { data } = res
-
-        return data
-
-    } catch (error) {
-
-        console.log(error)
-
-    }
-}
 
 export const Product_Category = () => {
 
     const token = useSelector(({ auth }) => auth.token) || localStorage.getItem('admin_token')
-    const [food_list, setFoodList] = useState([])
+    const food_list = useSelector(({product}) => product.data)
     const Navigate = useNavigate()
+    const dispatch = useDispatch()
 
     useEffect(() => {
 
-        getAllProduct(token).then((res) => setFoodList(res))
+        dispatch(getAllProduct(token))
 
     }, [])
 
