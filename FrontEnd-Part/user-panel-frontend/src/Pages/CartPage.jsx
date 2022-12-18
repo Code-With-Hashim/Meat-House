@@ -1,7 +1,9 @@
+
+
+
 import React from 'react'
-import { BsCart2 } from "react-icons/bs"
 import { ImCancelCircle } from 'react-icons/im'
-import sa from "../css.Module/Cart.module.css"
+import sa from "../css.Module/CartPage.module.css"
 import { RxCross1 } from "react-icons/rx"
 import { BiRupee } from "react-icons/bi"
 import { Link, NavLink } from 'react-router-dom'
@@ -129,7 +131,7 @@ const BottomCart = () => {
 
           </Box>
         </Box>
-        <Box padding="0px 10px 0px 10px" justifyContent="space-between " display="flex" className={sa.proceed}>
+        <Box padding="0px 10px 0px 10px" justifyContent='space-between' display="flex" className={sa.proceed}>
           <Text fontWeight="bold" fontSize="16px" alignItems="center" display="flex">Total:  <BiRupee /> 265</Text>
           <Button colorScheme="red">Proceed to checkout</Button>
         </Box>
@@ -140,7 +142,7 @@ const BottomCart = () => {
 const TotalAmount = () => {
   return (
     <>
-      <Box padding="10px" marginTop='20px' borderRadius="10px" marginBottom="150px" border="1px dashed black" height="130px" width="100%">
+      <Box padding="10px" marginTop='20px' borderRadius="10px" marginBottom="200px" border="1px dashed black" height="130px" width="100%">
         <Text fontWeight="black" fontSize="14px">BILL DETAILS</Text>
         <Box gap="5px" flexDirection="column" display="flex" justifyContent="space-between" >
           <Box fontSize="12px" justifyContent="space-between" display="flex">
@@ -235,15 +237,36 @@ function DrawerExample() {
   )
 }
 
-const Cart = () => {
+const CartPage = () => {
   return (
-    <Box>
-      <DrawerExample />
+    <>
+    <Box padding="10px">
+    <VStack
+              divider={<StackDivider borderColor='gray.200' />}
+              spacing={4}
+              align='stretch'
+            >
+              <Box className={sa.discount_banner} >
+                <Text fontSize="13px" textAlign="center" color="white"  >Congratulations, Your delivery charge is waived off!!!</Text>
+
+              </Box>
+
+              <Box className={sa.discount_banner2} >
+                <Text fontSize="13px" textAlign="center" >Congratulations! You've saved ₹20</Text>
+
+              </Box>
+            </VStack>
+            <CartData />
+            <Join />
+            <CartAdd />
+            <TotalAmount />
+            <BottomCart />
     </Box>
-
-
-
-
+     
+    
+    </>
+    
   )
 }
-export default Cart
+
+export default CartPage

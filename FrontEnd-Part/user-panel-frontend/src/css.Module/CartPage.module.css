@@ -38,11 +38,11 @@
   position: fixed;
   background-color: aliceblue;
  
-  bottom: 0px;
+  bottom: 50px;
   width: 95%;
   height: 100px;
-  margin-left: -16px;
   margin-bottom: 14px;
+  left: 50;
 }
 .proceed{
 background-color: white;
