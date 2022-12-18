@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 
 const Admin_Authenticated_schema = mongoose.Schema({
+    profile_img : String,
     name: String,
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },

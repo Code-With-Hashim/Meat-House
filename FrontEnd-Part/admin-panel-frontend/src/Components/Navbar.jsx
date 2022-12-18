@@ -31,9 +31,7 @@ export const AdminNavbar = () => {
     const token = useSelector(({ auth }) => auth.token) || localStorage.getItem('admin_token')
     const [adminDetail, setAdminDetail] = useState({})
     const dispatch = useDispatch()
-    const Navigate = useNavigate() 
-
-    console.log(token)
+    const Navigate = useNavigate()
 
     useEffect(() => {
 
@@ -55,7 +53,6 @@ export const AdminNavbar = () => {
             </Box>
             <Spacer />
             <Stack direction={'row'} alignItems='center' gap='54'>
-                <Button colorScheme='teal'>Sign Up</Button>
                 <Popover
                     placement='top-start'
                 >
@@ -70,10 +67,16 @@ export const AdminNavbar = () => {
                         <PopoverCloseButton />
                         <PopoverBody>
                             <Stack direction={'column'}>
-                                <Button  onClick={() => Navigate("/account Detail")} colorScheme={'blue'}>Account Detail</Button>
+
+                                <Button onClick={() => Navigate("/Dashboard/account Detail")} colorScheme={'blue'}>Account Detail</Button>
+                                <Divider />
+                                {window.location.pathname !== "/Dashboard" ? <Button onClick={() => Navigate("/Dashboard")} colorScheme={'green'}>Dashboard</Button> : <></>}
+                                {window.location.pathname !== "/Dashboard/Food%20Item%20List" && window.location.pathname !== "/Dashboard" ? <Button onClick={() => Navigate("/Dashboard/Food Item List")} colorScheme={'green'}>Food Details</Button> : <></>}
+                                {window.location.pathname !== "/Dashboard/Multi%20User" && window.location.pathname !== "/Dashboard" ? <Button onClick={() => Navigate("/Dashboard/Multi User")} colorScheme={'green'}>User Details</Button> : <></>}
+                                <Button onClick={() => Navigate("/Dashboard/create Product")} colorScheme={'green'}>Add Product Item</Button>
+                                <Button onClick={() => Navigate("/Dashboard/recycle Product")} colorScheme={'green'}>Recycle Product Item</Button>
                                 <Divider />
                                 <Button colorScheme={'red'} onClick={() => dispatch(signout())}>Sign Out</Button>
-                                <Divider />
                             </Stack>
                         </PopoverBody>
                     </PopoverContent>
