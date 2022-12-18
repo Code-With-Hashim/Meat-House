@@ -14,9 +14,9 @@ const { dirname } = require("path")
 //SECRET_KEY 
 
 cloudinary.config({
-    cloud_name: 'djhktua3a',
-    api_key: '267842812239797',
-    api_secret: '_12w8hbAlsazWgZcWsFII5Z89FE'
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET_KEY
 });
 
 const SECRET_KEY = process.env.SECRET_KEY

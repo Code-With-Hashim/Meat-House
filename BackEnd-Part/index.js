@@ -1,58 +1,37 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
 
-const { connect } = require("./config/db");
-const {
-  Chicken_Collection_Routes,
-} = require("./User-Panel-Backend/routes/Food_Collection_Routes/Chicken_collection_Routes");
-const {
-  Mutton_Collection_Routes,
-} = require("./User-Panel-Backend/routes/Food_Collection_Routes/Mutton_collection_Routes");
-const {
-  Marindas_Collection_Routes,
-} = require("./User-Panel-Backend/routes/Food_Collection_Routes/Ready_to_collection.routes");
-const {
-  Eggs_Collection_Routes,
-} = require("./User-Panel-Backend/routes/Food_Collection_Routes/Eggs_Collection_routes");
-const {
-  Prawns_Collection_Routes,
-} = require("./User-Panel-Backend/routes/Food_Collection_Routes/Prawns_Collection.routes");
-const {
-  User_Authenticated_Router,
-} = require("./User-Panel-Backend/routes/User_Authenticated_Routes/User_Authenticated_Routes");
-const {
-  User_Cart_Routes,
-} = require("./User-Panel-Backend/routes/Cart_routes/User_Cart_routes");
-const {
-  User_Address_Router,
-} = require("./User-Panel-Backend/routes/Address_Routes/Address_Routes");
-const {
-  Mix_Food_Collection_Routes,
-} = require("./User-Panel-Backend/routes/Food_Collection_Routes/MixFood_Collection_Routes");
-const {
-  admin_authenticated_routes,
-} = require("./Admin-Panel-Backend/routes/Admin_authenticated.routes");
-const {
-  admin_product_routes,
-} = require("./Admin-Panel-Backend/routes/Admin_Product_routes");
-const {
-  admin_product_recyle_routes,
-} = require("./Admin-Panel-Backend/routes/Admin_product_recyle.routes");
-const {
-  admin_userlist_routes,
-} = require("./Admin-Panel-Backend/routes/Admin_userlist.routes");
+require('dotenv').config()
+const express = require('express')
+const cors = require('cors')
 
-const app = express();
-const PORT = 8080;
 
-app.use(express.json());
-// app.use(express.urlencoded({ extended: true }))
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+
+const { connect } = require('./config/db')
+const { Chicken_Collection_Routes } = require("./User-Panel-Backend/routes/Food_Collection_Routes/Chicken_collection_Routes")
+const { Mutton_Collection_Routes } = require("./User-Panel-Backend/routes/Food_Collection_Routes/Mutton_collection_Routes")
+const { Marindas_Collection_Routes } = require("./User-Panel-Backend/routes/Food_Collection_Routes/Ready_to_collection.routes")
+const { Eggs_Collection_Routes } = require("./User-Panel-Backend/routes/Food_Collection_Routes/Eggs_Collection_routes")
+const { Prawns_Collection_Routes } = require("./User-Panel-Backend/routes/Food_Collection_Routes/Prawns_Collection.routes")
+const { User_Authenticated_Router } = require('./User-Panel-Backend/routes/User_Authenticated_Routes/User_Authenticated_Routes')
+const { User_Cart_Routes } = require("./User-Panel-Backend/routes/Cart_routes/User_Cart_routes")
+const { User_Address_Router } = require('./User-Panel-Backend/routes/Address_Routes/Address_Routes')
+const { Mix_Food_Collection_Routes } = require('./User-Panel-Backend/routes/Food_Collection_Routes/MixFood_Collection_Routes')
+const { admin_authenticated_routes } = require('./Admin-Panel-Backend/routes/Admin_authenticated.routes')
+const { admin_product_routes } = require('./Admin-Panel-Backend/routes/Admin_Product_routes')
+const { admin_product_recyle_routes } = require('./Admin-Panel-Backend/routes/Admin_product_recyle.routes')
+const { admin_userlist_routes } = require('./Admin-Panel-Backend/routes/Admin_userlist.routes')
+
+const app = express()
+const PORT = 8080
+
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(express.static('publlic'))
+app.use(cors({
+    origin : "*"
+}))
+
+
+
 
 // Food Collection ---Routes
 app.use("/Chicken", Chicken_Collection_Routes);
