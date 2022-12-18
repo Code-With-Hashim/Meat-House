@@ -1,9 +1,10 @@
 
-
+import axios from "axios"
 import sa from "../css.Module/PaymentPage.module.css"
 
 import React from 'react'
-import { Box, Button, Image, Select, Stack, Text } from "@chakra-ui/react"
+import { useState,useEffect } from "react";
+import { Box, Button, Image, Select, Stack, Text, useToast } from "@chakra-ui/react"
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
@@ -11,8 +12,31 @@ import { BsFillCircleFill } from "react-icons/bs"
 import { RxCross1 } from "react-icons/rx"
 import {BiRupee} from "react-icons/bi"
 import {AiFillCheckCircle} from "react-icons/ai"
+import Subtotal from "../components/Subtotal";
+import { useSelector } from "react-redux";
 
 const Paymentpage = () => {
+const [cart, setCart] = useState([]);
+const toast = useToast()
+const USER_TOKEN = useSelector((store) => store.AuthReducer.token);
+const AuthStr = `Bearer ${USER_TOKEN}`;
+  const getData = async () => {
+    await axios
+      .get("http://localhost:8080/cart", {
+        headers: { Authorization: AuthStr },
+      })
+      .then((res) => {
+        setCart(res.data.Cart);
+        // total(cart);
+        // setCartreload((pre) => pre + 1);
+      })
+      .then((res) => {
+        // setSubTotal(total(cart));
+      });
+  };
+   useEffect(() => {
+    getData();
+  }, []);
   return (
     <Box>
         <>
@@ -108,7 +132,7 @@ const Paymentpage = () => {
         <Box gap="10px" flexDirection="column" display="flex" justifyContent="space-between" >
           <Box fontSize="16px" justifyContent="space-between" display="flex">
             <Text>Subtotal</Text>
-            <Text>179</Text>
+            <Text><Subtotal cart={cart} Ship={0}/></Text>
           </Box>
           <Box fontSize="16px" justifyContent="space-between" display="flex">
             <Text>Delevery charge</Text>
@@ -122,14 +146,22 @@ const Paymentpage = () => {
 
           <Box fontWeight="bold" fontSize="16px" justifyContent="space-between" display="flex">
             <Text >Total</Text>
-            <Text alignItems="center" display="flex"><BiRupee />200</Text>
+            <Text alignItems="center" display="flex"><BiRupee /><Subtotal cart={cart} Ship={50}/></Text>
           </Box>
 
         </Box>
       </Box>
         </Box>
             <Image src="https://www.licious.in/img/rebranding/Cash_on_delivery.png"/>
-            <Button colorScheme="red">Place Order</Button>
+            <Link to="/"><Button  onClick={() =>
+        toast({
+          title: 'Order Placed.',
+          description: "We've deliver soon.",
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        })
+      } colorScheme="red">Place Order</Button></Link>
 
             
         </Box>

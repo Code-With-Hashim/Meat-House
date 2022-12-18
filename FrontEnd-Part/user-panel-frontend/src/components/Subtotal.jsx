@@ -1,8 +1,8 @@
 import React from "react";
 
 const Subtotal = ({ cart, Ship }) => {
-  console.log(Ship);
-  console.log(cart);
+  // console.log(Ship);
+  // console.log(cart);
   const splitrs = (str) => {
     str = str.split("₹");
     return +str[1];
@@ -13,7 +13,7 @@ const Subtotal = ({ cart, Ship }) => {
     cart?.forEach((el) => {
       sum += el.quantity * splitrs(el.rupee);
     });
-    console.log(sum);
+    // console.log(sum);
     return sum + Ship;
   };
   return total();

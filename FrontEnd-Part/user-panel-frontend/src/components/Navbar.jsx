@@ -29,20 +29,15 @@ import { DrawerExample } from "./Login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/AuthReducer/Action";
-
 import { getData } from "../redux/AppReducer/Action";
 import Cart from "./Cart";
 import { cat } from "../Utils/Constants";
 import { Link } from "react-router-dom";
 
-
 const Navbar = () => {
-  // const [loc, setLoc] = useState("" || "Delhi");
   const [city, setCity] = useState();
-  // const [isAuth, setIsAuth] = useState(false);
-
   const city1 = useSelector((store) => store.AppReducer.city);
-
+  const cartrender = useSelector((store) => store.AppReducer.cart);
   const isAuth = useSelector((store) => store.AuthReducer.isAuth);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
@@ -59,32 +54,22 @@ const Navbar = () => {
     });
   };
   const error = () => {
-    // setLoc(city);
     dispatch(getData("Delhi"));
   };
-  // const getuser = () => {
-  //   if (to != undefined) {
-  //     setIsAuth(true);
-  //   }
-  // };
+
   const handleChange = (e) => {
     setCity(e.target.value);
-    // setLoc(e.target.value);
+   
   };
   const handleCity = (e) => {
     dispatch(getData(city));
   };
   let to = localStorage.getItem("token");
-  useEffect(
-    () => {
-      navigator.geolocation.getCurrentPosition(success, error);
 
-      // getuser();
-    },
-    [
-      // setLoc, setCity
-    ]
-  );
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(success, error);
+
+  }, [cartrender]);
 
   return (
     <>
@@ -245,7 +230,7 @@ const Navbar = () => {
                   alt="."
                 /> */}
 
-                <Cart/>
+                <Cart />
 
                 <Text fontSize="xs">Cart</Text>
               </Box>
