@@ -16,19 +16,15 @@ const authentication = (req, res, next) => {
             }
         });
 
-        
-
         if (decoded) {
-            const {AdminID , UserID} = decoded
 
-            if(AdminID) {
-                req.body.AdminID = AdminID
-            } else {
-                req.body.UserID = UserID
-            }
-            
-
+            const { AdminID, UserID } = decoded
+            req.body.AdminID = AdminID
+            req.body.UserID = UserID
             next()
+            req.body.UserID = UserID
+            req.body.AdminID = AdminID
+
         } else {
             res.status(401).send({
                 message: 'Please login to access the endpoint',
@@ -47,12 +43,12 @@ const authentication = (req, res, next) => {
 const requestIp = require('request-ip');
 
 // inside middleware handler
-const ipMiddleware = function(req, res, next) {
-    const clientIp = requestIp.getClientIp(req); 
+const ipMiddleware = function (req, res, next) {
+    const clientIp = requestIp.getClientIp(req);
     req.body.UserIP = clientIp
     next();
 };
 
 
 
-module.exports = { authentication  , ipMiddleware}
+module.exports = { authentication, ipMiddleware }
