@@ -1,3 +1,4 @@
+
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
@@ -31,43 +32,34 @@ app.use(cors({
 
 
 
+
 // Food Collection ---Routes
-app.use("/Chicken", Chicken_Collection_Routes)
-app.use("/Mutton", Mutton_Collection_Routes)
-app.use("/Marindas", Marindas_Collection_Routes)
-app.use("/Eggs", Eggs_Collection_Routes)
-app.use("/Prawns", Prawns_Collection_Routes)
-app.use("/mixfood", Mix_Food_Collection_Routes)
+app.use("/Chicken", Chicken_Collection_Routes);
+app.use("/Mutton", Mutton_Collection_Routes);
+app.use("/Marindas", Marindas_Collection_Routes);
+app.use("/Eggs", Eggs_Collection_Routes);
+app.use("/Prawns", Prawns_Collection_Routes);
+app.use("/mixfood", Mix_Food_Collection_Routes);
 
 //User-Collection ---Routes
-app.use("/User", User_Authenticated_Router)
+app.use("/User", User_Authenticated_Router);
 //Cart-Collection ---Routes
-app.use("/cart", User_Cart_Routes)
+app.use("/cart", User_Cart_Routes);
 //address-collection --Routes
 
-app.use("/address", User_Address_Router)
+app.use("/address", User_Address_Router);
 
-//admin collection --- 
-app.use("/admin" , admin_authenticated_routes)
-app.use("/admin/products" , admin_product_routes)
-app.use("/admin/recycle"  , admin_product_recyle_routes)
-app.use("/admin/userdetail" , admin_userlist_routes) 
+//admin collection ---
+app.use("/admin", admin_authenticated_routes);
+app.use("/admin/products", admin_product_routes);
+app.use("/admin/recycle", admin_product_recyle_routes);
+app.use("/admin/userdetail", admin_userlist_routes);
 
-
-app.get("/", (req, res) => {
-    
-})
-
-
+app.get("/", (req, res) => {});
 
 app.listen(PORT, async () => {
-    try {
-
-        await connect,
-        console.log('Database is connected successfully')
-        console.log('Listening on port')
-
-    } catch (error) {
-
-    }
-})
+  try {
+    await connect, console.log("Database is connected successfully");
+    console.log("Listening on port");
+  } catch (error) {}
+});
