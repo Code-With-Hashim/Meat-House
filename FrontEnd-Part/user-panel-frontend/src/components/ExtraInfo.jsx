@@ -12,7 +12,7 @@ function ExtraInfo({ data }) {
     return <>
         <ExtraInfoWrapper>
             <div style={{ height: "250px", width: '100%', padding: "20px" }}>
-                <img  style={{height:"100%"}} width='100%' src={image?image1:image2} alt="images" />
+                <Image  src={image?image1:image2} alt="images" />
             </div>
             <div style={{ height: "fit-content", width: '100%', paddingInline: "20px" }}>
                 <Tabs colorScheme='green'>
@@ -69,4 +69,38 @@ grid-template-columns:50% 50%;
 gap:10px;
 background-color:white;
 padding:20px; 
+@media all and (max-width:900px) and (min-width:300px){
+    display:grid;
+    grid-template-columns:100%;
+}
+`
+const Image = styled.img`
+height:100%;
+width:100%;
+
+`
+
+const Image_container = styled.div`
+height: 250px;
+width: 100%;
+padding: 20px;
+@media all and (max-width:900px) and (min-width:700px){
+    height:200px;
+}
+@media all and (max-width:600px) and (min-width:300px){
+    height:130px;
+}
+`
+
+
+const Tabs_container= styled.div`
+height: fit-content;
+width: 100%;
+padding-inline: 20px;
+@media all and (max-width:900px) and (min-width:700px){
+    padding-inline:10px;
+}
+@media all and (max-width:600px) and (min-width:300px){
+    padding-inline:5px;
+}
 `

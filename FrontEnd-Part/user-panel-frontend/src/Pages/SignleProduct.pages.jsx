@@ -65,19 +65,20 @@ function SingleProductPage() {
                         <BreadcrumbLink href={`/${category}`} color="gray.500" textDecoration="none" >{category === 'Chicken' ? "Chicken" : ""}</BreadcrumbLink>
                     </BreadcrumbItem>
                     <BreadcrumbItem>
-                        <BreadcrumbLink href='#' color="gray.500" textDecoration="none" >{product.product_name}</BreadcrumbLink>
+                        <BreadcrumbLink href='#' color="gray.500" textDecoration="none" noOfLines={1} >{product.product_name}</BreadcrumbLink>
                     </BreadcrumbItem>
                 </Breadcrumb>
-                <div style={{ height: "50px" }}></div>
+                <div style={{ height: "20px" }}></div>
                 <SingleProductDetails id={id} handleClick={PatchRequest} image={[product.product_image_src, product.product_image_src]}
                     name={product.product_name} summury={[product.cta_text, product.item_desc]} Texts={Text} day={product.message} time={product.message_2} price={product.price}/>
-                < AddtoCartCompo opacity={opacity} >
+                    < AddtoCartCompo opacity={opacity}>
                     <AddtoCart name={product.product_name} Image={product.product_image_src} icon="https://www.licious.in/img/rebranding/express_delivery.svg" day={product.message} time={product.message_2} price={product.price} id={id} handleClick={PatchRequest} />
                 </AddtoCartCompo>
                 <ExtraInfo></ExtraInfo>
             </Container>
             <LiciousWay />
             <AddtoCart margin="auto" Image={product.product_image_src} name={product.product_name} icon="https://www.licious.in/img/rebranding/express_delivery.svg" day={product.message} time={product.message_2} price={product.price} id={id} handleClick={PatchRequest} />
+            
             {/* <div style={{ height: "1000px" }}></div> */}
         </Wrapper>
     </>
@@ -91,7 +92,11 @@ export const AddtoCartCompo = styled.div`
     position:fixed;
     bottom:0px;
     width:85%;
-    margin:auto;
+    // margin:auto;
     z-index:10;
+    // border:1px solid red;
+    @media all and (max-width:500px){
+        opacity:0;
+    }
 `
 

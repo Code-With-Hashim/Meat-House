@@ -24,18 +24,18 @@ function LiciousWay(){
         }
     ]
     return <>
-        <Box w='full' bg='white' h='fit-content' boxShadow='md' pt='30px' mt='70px' mb="30px">
+        <Box w='full' bg='white' h='fit-content' boxShadow='md' pt={{base:'10px',sm:"10px ",md:"15px",lg:"20px"}} mt={{base:'20px',sm:"20px",md:"40px",lg:'40px',xl:'70px'}} mb="30px">
             <Box display="flex" marginBottom={"50px"} gap="10px" height={"fit-content"} alignItems="center" justifyContent={'center'}>
             <hr width="20%" />
             <Text fontSize={"2xl"} fontWeight="bold"><span style={{color:"gray"}}>The</span> <span style={{color:"red"}}>Licious</span> <span style={{color:"gray"}}>Way</span></Text>
             <hr width="20%"/>
             </Box>
-            <Container maxW="6xl"  display={'grid'} gridTemplateColumns={"13% 13% 13% 13% 13%"} alignItems="center" justifyContent={'space-between'}>
+            <Container maxW="6xl"  display={'grid'} gridTemplateColumns={"13% 13% 13% 13% 13%"} alignItems="baseline" justifyContent={'space-between'}>
             {
                 data.map((ele,index)=>{
                     return <Box key={index}>
                         <img width="100%" height="100px" className='image' src={ele.img} alt={ele.text} />
-                        <Text textAlign={'left'} fontSize={'xs'} color='gray'>{ele.text}</Text>
+                        <Text textAlign={'left'} fontSize={{base:'10px',sm:"12px",md:"12px",lg:'15px',xl:'15px'}} color='gray'>{ele.text}</Text>
                     </Box>
                 })
             }
