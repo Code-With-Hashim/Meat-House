@@ -1,4 +1,4 @@
-// import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
 import { Router } from './routes/route';
 import 'bootstrap/dist/css/bootstrap.min.css';
