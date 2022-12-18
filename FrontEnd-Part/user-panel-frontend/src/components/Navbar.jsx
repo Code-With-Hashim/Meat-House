@@ -29,10 +29,12 @@ import { DrawerExample } from "./Login";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../redux/AuthReducer/Action";
+
 import { getData } from "../redux/AppReducer/Action";
 import Cart from "./Cart";
 import { cat } from "../Utils/Constants";
 import { Link } from "react-router-dom";
+
 
 const Navbar = () => {
   // const [loc, setLoc] = useState("" || "Delhi");
@@ -242,7 +244,9 @@ const Navbar = () => {
                   src="https://www.licious.in/img/rebranding/cart_icon.svg"
                   alt="."
                 /> */}
-                <Cart />
+
+                <Cart/>
+
                 <Text fontSize="xs">Cart</Text>
               </Box>
             </Hide>
