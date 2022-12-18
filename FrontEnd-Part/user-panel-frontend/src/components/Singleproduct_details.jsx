@@ -26,24 +26,24 @@ function SingleProductDetails({ image, name, summury, Texts,price,time,day,icon=
                     }
                 </Carousel>
             </div>
-            <div style={{ height: "fit-content", width: "90%", paddingTop: "10px", paddingLeft: "10px", textAlign: 'left' }}>
-                <Text fontSize={'lg'} fontWeight="semibold">{name} </Text>
-                <Box display={"flex"} w='auto' justifyContent={"space-between"} h="40px">
+            <Details>
+                <Text fontSize={'lg'} fontWeight="semibold">{name}</Text>
+                <Box display={"flex"} w='auto' justifyContent={"space-between"} h="fit-content">
                     {
                         summury.map((ele, index) => {
-                            return <Text key={index} color='gray' fontSize={'sm'}>{ele}</Text>
+                            return <Text noOfLines={1} key={index} color='gray' fontSize={'sm'}>{ele}</Text>
                         })
                     }
                 </Box>
-                <hr style={{ width: "100%",marginTop:"10px" }} />
-                <Box display="flex" flexDirection={'column'} gap="30px" marginTop={"10px"}>
+                <hr style={{ width: "100%",marginTop:"20px" }} />
+                <Box display="flex" flexDirection={'column'} gap={{base:"10px",sm:"10px",md:"15px",lg:'20px',xl:'30px'}} marginTop={"10px"}>
                     {
                         Texts.map((ele, index) => {
                             return <Text key={index} color="gray" fontSize={"sm"}>{ele}</Text>
                         })
                     }
                 </Box>
-                <Box border="1px solid gray" borderRadius={"5px"} height="100px" paddingInline="30px" width="95%">
+                <Box border="1px solid gray" borderRadius={"5px"} marginTop="10px" height="100px" paddingInline={{base:"5px",sm:'5px',md:"10px",lg:'20px',xl:"30px"}} width="96%">
                     <div style={{ display: 'flex', justifyContent: "space-between", height: "50%" }}>
                         <div style={{ display: 'flex', alignItems: "center", gap: "10px" }}>
                             <img width="30px" height="30px" src="https://d2407na1z3fc0t.cloudfront.net/Banner/Pieces.png" alt="bottle-icon" />
@@ -73,7 +73,7 @@ function SingleProductDetails({ image, name, summury, Texts,price,time,day,icon=
                         <Text color="gray.600" fontWeight={"semibold"} fontSize={"md"}>{time}</Text>
                     </div>
                 </AddtoCartWrapper>
-            </div>
+            </Details>
         </ProductWrapper>
     </>
 }
@@ -85,7 +85,29 @@ export const ProductWrapper = styled.div`
     grid-template-columns:50% 50%;
     gap:10px;
     padding:20px;
-    // border:1px solid red;
     background-color:white;
+    @media all and (max-width:902px) and (min-width:700px){
+        display:flex;
+        flex-direction:column;
+    }
+    @media all and (max-width:600px) and (min-width:300px){
+        display:flex;
+        flex-direction:column;
+    }
 `;
 
+
+export const Details = styled.div`
+height: fit-content;
+width: 90%;
+padding-top: 10px;
+padding-left: 10px;
+text-align: left;
+gap:10px;
+@media all and (max-width:902px) and (min-width:300px){
+    width:100%;
+}
+`
+export const HorizontalLine = styled.hr`
+
+`

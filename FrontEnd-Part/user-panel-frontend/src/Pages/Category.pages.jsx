@@ -70,9 +70,11 @@ function CategoryPage() {
         console.log(res);
       }).catch(err=>console.log(err));
   }
+
+  // ?od=1234234
   const query = useLocation().search;
+  console.log(query);
   let id = new URLSearchParams(query).get("category_id");
-    // console.log(id);
   const Category = useParams();
   const [data, setData] = useState([]);
   const [dataSearch,setDataSearch] = useState([]);
@@ -105,14 +107,14 @@ function CategoryPage() {
         <NameWrapper>
           {Category.category}
           <Tooltip1>
-            <img width={"43px"} src='https://d2407na1z3fc0t.cloudfront.net/USP/usp_58e78b9c4b2e0' alt="Farming"></img>
+            <Image src='https://d2407na1z3fc0t.cloudfront.net/USP/usp_58e78b9c4b2e0' alt="Farming"></Image>
             <Tooltip label="Working with farmers and partners, picking breed raised humanely on controlled farms." aria-label='A tooltip'>
               Farm raised superior breed
             </Tooltip>
           </Tooltip1>
           <Tooltip1>
 
-            <img width={"43px"} src='https://d2407na1z3fc0t.cloudfront.net/USP/usp_58e78bdf673b7' alt='props'></img>
+            <Image src='https://d2407na1z3fc0t.cloudfront.net/USP/usp_58e78bdf673b7' alt='props'></Image>
             <Tooltip label="No Added Chemical , Antibiotic residue free." aria-label='A tooltip'>
               No Added Chemical , Antibiotic residue free.
             </Tooltip>
@@ -120,10 +122,11 @@ function CategoryPage() {
         </NameWrapper>
         <hr/>
         <Categories handleClick ={handleClick} SearchData = {dataSearch} query={id} category={Category.category}/>
-        <Grid templateColumns='repeat(3, 1fr)' gap={6} mt={"50px"}>
+        {/* Responsive ness of this grid is complete */}
+        <Grid templateColumns={{base:'100%',sm:'50% 50%',md:'50% 50%',lg:'32% 32% 32%',xl:'repeat(3,1fr)'}} gap={{base:2,sm:3,md:3}} mt={{base:"30px",sm:"30px",md:"40px"}}>
           {
               data && data.map((ele,index)=>{
-                return <GridItem key={index} w='100%' h='fit-content'  boxShadow='md' bg='whiteAlpha.800' borderRadius={"10px"} pb={"10px"} >
+                return <GridItem key={index} w={{base:'100%',sm:'100%',md:"96%",lg:"96%"}} h='fit-content'  boxShadow='md' bg='whiteAlpha.800' borderRadius={"10px"} pb={"10px"} >
                <ProductCard link={`/${Category.category}/${ele.product_id}`} data={ele} handleClick={PatchRequest} id={ele.product_id}/>
               </GridItem>
               })
@@ -136,11 +139,22 @@ function CategoryPage() {
 
 export { CategoryPage };
 
+export const Image = styled.img`
+    width:43px;
+    @media all and (max-width:620px) and (min-width:300px){
+      width:35px;
+    }
+`
+
 export const Wrapper = styled.div`
 height:fit-content;
 // border:1px solid red;
 background-color:#ededed;
 padding:10px;
+margin-top:80px;
+@media all and (max-width:902px) and (min-width:700px){
+  padding:0px;
+}
 `
 
 export const NameWrapper = styled.div`
@@ -150,7 +164,12 @@ export const NameWrapper = styled.div`
   display:flex;
   gap:15px;
   border-bottom:1px solid #e3e0e0;
-  height:50px;
+  height:fit-content;
+  @media all and (max-width:620px) and (min-width:300px){
+    displey:flex;
+    flex-direction:column;
+    gap:0px;
+  }
 `
 
 export const Tooltip1 = styled.div`

@@ -228,9 +228,7 @@ const Cart = () => {
       </Box>
       
     </>
-  )
-}
-
+  
 const Join = () => {
   return (
     <>
