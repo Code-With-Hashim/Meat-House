@@ -2,13 +2,11 @@ const mongoose = require('mongoose')
 
 
 const Admin_Authenticated_schema = mongoose.Schema({
-    name: {
-        firstName: String,
-        lastName: String,
-    },
+    name: String,
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    gender: { type: String, enum: ['Male', 'Female'] }
+    gender: { type: String, enum: ['Male', 'Female' , 'Other'] },
+    maritalStatus : {type : String , enum : ['Single' , 'Married']}
 } , {
     versionKey : false,
     timestamps : true

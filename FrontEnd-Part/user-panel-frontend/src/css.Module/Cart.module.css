@@ -38,7 +38,7 @@
   position: fixed;
   background-color: aliceblue;
  
-  bottom: 0;
+  bottom: 0px;
   width: 95%;
   height: 100px;
   margin-left: -16px;
@@ -46,4 +46,5 @@
 }
 .proceed{
 background-color: white;
+
 }
