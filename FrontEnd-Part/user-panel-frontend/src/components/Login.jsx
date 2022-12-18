@@ -55,9 +55,9 @@ export function DrawerExample({ onOpen, isOpen, onClose, btnRef }) {
     const val = type === "number" ? Number(value) : value;
     setFormValue({ ...formValue, [name]: val });
   };
-  const handleCheckUser = (e) => {
+  const handleCheckUser = async (e) => {
     e.preventDefault();
-    dispatch(
+    await dispatch(
       userLogin({ email: formValue.email, password: formValue.password })
     )
       .then(() => {
