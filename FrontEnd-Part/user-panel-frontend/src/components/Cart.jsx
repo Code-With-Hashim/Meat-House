@@ -49,7 +49,7 @@ const Cart = ({ setCartreload }) => {
 
     console.log(payload);
     axios
-      .post(`http://localhost:8080/cart/${id}`, payload, {
+      .post(`${process.env.REACT_APP_CART_URL}${id}`, payload, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {
@@ -63,7 +63,7 @@ const Cart = ({ setCartreload }) => {
 
     console.log(payload);
     axios
-      .post(`http://localhost:8080/cart/${id}`, payload, {
+      .post(`${process.env.REACT_APP_CART_URL}${id}`, payload, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {
@@ -75,7 +75,7 @@ const Cart = ({ setCartreload }) => {
   const handleDelete = (id) => {
     console.log(id);
     axios
-      .delete(`http://localhost:8080/cart/${id}`, {
+      .delete(`${process.env.REACT_APP_CART_URL}${id}`, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {
@@ -87,7 +87,7 @@ const Cart = ({ setCartreload }) => {
 
   const getData = async () => {
     await axios
-      .get("http://localhost:8080/cart", {
+      .get(`${process.env.REACT_APP_CART_URL}`, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {
@@ -360,7 +360,7 @@ const Cart = ({ setCartreload }) => {
                     >
                       Total: <BiRupee /> <Subtotal cart={cart} Ship={50} />
                     </Text>
-                    <Link to="/summary"><Button colorScheme="red">Proceed to checkout</Button></Link>
+                    <Link to="/summary"><Button colorScheme="red" disabled={cart.length === 0}>Proceed to checkout</Button></Link>
                   </Box>
                 </Box>
               </>
@@ -387,7 +387,7 @@ const Cart = ({ setCartreload }) => {
 
 //     console.log(payload);
 //     axios
-//       .post(`http://localhost:8080/cart/${id}`, payload, {
+//       .post(``${process.env.REACT_APP_CART_URL}`${id}`, payload, {
 //         headers: { Authorization: AuthStr },
 //       })
 //       .then((res) => {
@@ -401,7 +401,7 @@ const Cart = ({ setCartreload }) => {
 
 //     console.log(payload);
 //     axios
-//       .post(`http://localhost:8080/cart/${id}`, payload, {
+//       .post(``${process.env.REACT_APP_CART_URL}`${id}`, payload, {
 //         headers: { Authorization: AuthStr },
 //       })
 //       .then((res) => {
@@ -413,7 +413,7 @@ const Cart = ({ setCartreload }) => {
 //   const handleDelete = (id) => {
 //     console.log(id);
 //     axios
-//       .delete(`http://localhost:8080/cart/${id}`, {
+//       .delete(``${process.env.REACT_APP_CART_URL}`${id}`, {
 //         headers: { Authorization: AuthStr },
 //       })
 //       .then((res) => {
@@ -438,7 +438,7 @@ const Cart = ({ setCartreload }) => {
 
 //   const getData = async () => {
 //     await axios
-//       .get("http://localhost:8080/cart", {
+//       .get(`${process.env.REACT_APP_CART_URL}`, {
 //         headers: { Authorization: AuthStr },
 //       })
 //       .then((res) => {
@@ -663,7 +663,7 @@ const BottomCart = () => {
   const AuthStr = `Bearer ${USER_TOKEN}`;
   const getData = async () => {
     await axios
-      .get("http://localhost:8080/cart", {
+      .get(`${process.env.REACT_APP_CART_URL}`, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {

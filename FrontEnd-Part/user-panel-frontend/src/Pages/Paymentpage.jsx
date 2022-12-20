@@ -22,7 +22,7 @@ const USER_TOKEN = useSelector((store) => store.AuthReducer.token);
 const AuthStr = `Bearer ${USER_TOKEN}`;
   const getData = async () => {
     await axios
-      .get("http://localhost:8080/cart", {
+      .get(`${process.env.REACT_APP_CART_URL}`, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {

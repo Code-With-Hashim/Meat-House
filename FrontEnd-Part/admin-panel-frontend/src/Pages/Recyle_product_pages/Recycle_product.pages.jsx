@@ -49,7 +49,7 @@ export const Recyle_Product = () => {
 
             })
 
-            setDeleteItem(true)
+            setDeleteItem(!deleteItem)
             toast({
                 position: 'top',
                 variant: 'subtle',
@@ -65,7 +65,7 @@ export const Recyle_Product = () => {
         }
     }
 
-    console.log(deleteItem)
+
 
     const handleDelete = async (id) => {
         try {
@@ -75,7 +75,7 @@ export const Recyle_Product = () => {
                     Authorization: `Bearer ${token}`
                 }
             })
-            setDeleteItem(true)
+            setDeleteItem(!deleteItem)
             toast({
                 position: 'top',
                 variant: 'subtle',

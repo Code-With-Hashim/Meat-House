@@ -102,7 +102,7 @@ export const Account_Detail = () => {
                 }
             })
 
-            setUpdate(true)
+            setUpdate(!update)
 
             toast({
                 position: 'top',
@@ -124,7 +124,6 @@ export const Account_Detail = () => {
     useEffect(() => {
 
         getAdminDetail(token).then((res) => setAdminDetail(res))
-        setUpdate(false)
 
     }, [update])
 

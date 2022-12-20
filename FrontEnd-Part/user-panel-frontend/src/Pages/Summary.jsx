@@ -19,7 +19,7 @@ const Summary = () => {
   const AuthStr = `Bearer ${USER_TOKEN}`;
   const getData = async () => {
     await axios
-      .get("http://localhost:8080/cart", {
+      .get(`${process.env.REACT_APP_CART_URL}`, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {
@@ -34,7 +34,7 @@ const Summary = () => {
   const handleDelete = (id) => {
     console.log(id);
     axios
-      .delete(`http://localhost:8080/cart/${id}`, {
+      .delete(`${process.env.REACT_APP_CART_URL}${id}`, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {

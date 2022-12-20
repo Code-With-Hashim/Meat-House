@@ -26,7 +26,7 @@ export const getData = (payload) => (dispatch) => {
   dispatch(isDataLoding);
   dispatch(isDataLodingSuccess(payload));
   //   return axios
-  //     .get("http://localhost:8080/products", { params })
+  //     .get("${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}products", { params })
   //     .then(({ data }) => {
   //       return dispatch(isDataLodingSuccess(data));
   //     })
@@ -40,7 +40,7 @@ export const cartData = (payload) => (dispatch) => {
   console.log("Dispatch");
   dispatch(isData(payload))
   // return axios
-  //   .get("http://localhost:8080/cart", {
+  //   .get(`${process.env.REACT_APP_CART_URL}`, {
   //     headers: { Authorization: AuthStr },
   //   })
   //   .then((res) => {

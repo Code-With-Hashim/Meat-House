@@ -20,18 +20,16 @@ export const SingleCategory = () => {
     const { id } = useParams()
     const toast = useToast()
     const singleCategory = useSelector(({ product }) => product.data)
-    const singleId = useSelector(({ product }) => product.category_id)
     const [product_id, setProductId] = useState()
     const [foodDataList, setFoodDataList] = useState([])
     const { isOpen, onOpen, onClose } = useDisclosure()
     const dispatch = useDispatch()
-    const [searchParams, setSearchParams] = useSearchParams()
 
     useEffect(() => {
         dispatch(getAllProduct(token))
-        setSearchParams({ category_id: singleId })
+    }, [])
 
-    }, [singleId])
+
 
     // useEffect(() => {
 
@@ -43,10 +41,6 @@ export const SingleCategory = () => {
         }
     })
 
-    if (singleCategoryData && singleCategoryData[0]) {
-        dispatch(category(singleCategoryData[0].foodCategory[0]._id))
-    }
-
 
 
     const handleFoodList = async (id) => {
@@ -56,15 +50,12 @@ export const SingleCategory = () => {
                 Authorization: `Bearer ${token}`
             }
         })
-        dispatch(category(id))
         setFoodDataList(foodData.data.Food_list)
     }
 
-
-
     useEffect(() => {
 
-        singleCategoryData && singleCategoryData[0] && axios.get(`${process.env.REACT_APP_ADMIN_BASE_URL}products/${singleId}`, {
+        singleCategoryData && singleCategoryData[0] && axios.get(`${process.env.REACT_APP_ADMIN_BASE_URL}products/${singleCategoryData[0].foodCategory[0]._id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -72,7 +63,7 @@ export const SingleCategory = () => {
             .then((res) => setFoodDataList(res.data.Food_list))
             .catch((err) => console.log(err))
 
-    }, [product_id])
+    }, [product_id, singleCategory[0] && singleCategory])
 
     const handleDelete = async () => {
         try {
@@ -105,6 +96,8 @@ export const SingleCategory = () => {
         onOpen()
 
     }
+
+    console.log(singleCategory)
 
 
 
@@ -140,6 +133,9 @@ export const SingleCategory = () => {
                                             <Heading size='md'>{i.product_name}</Heading>
                                             <Text>
                                                 {i.item_desc}
+                                            </Text>
+                                            <Text color='blue.600' fontSize='2xl'>
+                                                {i.rupee}
                                             </Text>
                                         </Stack>
                                     </CardBody>

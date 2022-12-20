@@ -1,7 +1,10 @@
+import { useToast } from "@chakra-ui/react"
 import axios from "axios"
-import { SIGNIN_ERROR, SIGNIN_LOADING, SIGNIN_SUCCESS, SIGNOUT_SUCCESS, SIGNUP_LOADING, SINGUP_SUCESS } from "./Authenticated.types"
+import { useNavigate } from "react-router-dom"
+import { SIGNIN_ERROR, SIGNIN_LOADING, SIGNIN_SUCCESS, SIGNOUT_SUCCESS, SIGNUP_ERROR, SIGNUP_LOADING, SIGNUP_SUCCESS, } from "./Authenticated.types"
 
 export const login = (creds) => async (dispatch) => {
+    
 
 
     dispatch({ type: SIGNIN_LOADING })
@@ -26,22 +29,4 @@ export const login = (creds) => async (dispatch) => {
 
 }
 
-
-export const signup = (payload) => async (dispatch) => {
-
-    dispatch({type : SIGNUP_LOADING})
-    try {
-        
-        const res = await axios.post(`${process.env.REACT_APP_ADMIN_BASE_URL}signup` , payload)
-
-        dispatch({type : SINGUP_SUCESS})
-
-    } catch (error) {
-        console.log(error)
-        dispatch({type : SIGNIN_ERROR})
-    }
-
-
-}
-
-export const signout = () => ({type : SIGNOUT_SUCCESS })
+export const signout = () => ({ type: SIGNOUT_SUCCESS })
