@@ -82,6 +82,7 @@ User_Cart_Routes.post("/:id", async (req, res) => {
             })
         })
 
+        console.log(cart_add_data)
 
         const UserData = await User_cart_modals.findOne({ UserID })
 
@@ -94,6 +95,7 @@ User_Cart_Routes.post("/:id", async (req, res) => {
                 const data = await User_cart_modals.updateOne({ UserID: UserID }, { $push: { Cart: cart_add_data } })
 
 
+                console.log(data)
                 if (data.acknowledged) {
                     res.status(201).send({
                         message: "Cart is been Added Successfully"
@@ -124,6 +126,7 @@ User_Cart_Routes.post("/:id", async (req, res) => {
         }
 
     } catch (error) {
+        console.log(error)
         res.status(404).send({
             message: "Something went wrong"
         })

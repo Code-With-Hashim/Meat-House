@@ -52,7 +52,7 @@ export const Addtocartfun = (id)=> {
 }
 
 function CategoryPage() {
-  const Toast = useToast();
+  
   function PatchRequest(id){
     console.log(id);
       Toast({
