@@ -71,8 +71,6 @@ const Address = () => {
                                         <Text>Mobile Number Not Updated</Text></> : <>
                                         <Text>{address.flatno == undefined || address.flatno === '' ? 'Not Updated' : address.flatno}</Text>
                                         <Text>{address.location == undefined || address.location === "" ? 'Not Updated' : address.location}</Text>
-                                        <Text>{address.city == undefined || address.city === "" ? 'Not Updated' : address.city}</Text>
-                                        <Text>{address.state === undefined || address.state === "" ? 'Not Updated' : address.state}</Text>
                                         <Text>Landmark {address.landmark === undefined || address.landmark === "" ? 'Not Updated' : address.landmark}</Text>
                                         <Text>Mobile Number {address.mobile === undefined || address.mobile === "" ? 'Not Updated' : address.mobile}</Text>
                                     </>

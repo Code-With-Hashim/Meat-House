@@ -41,6 +41,7 @@ export const userLogin = (payload) => async (dispatch) => {
     .post(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}user/login`, payload)
     .then((res) => {
       dispatch(isAuthSuccess(res.data));
+      window.location.reload(true)
     })
     .catch((err) => {
       dispatch(isAuthFailed);
