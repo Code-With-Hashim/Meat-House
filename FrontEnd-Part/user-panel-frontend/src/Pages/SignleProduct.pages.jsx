@@ -22,7 +22,7 @@ function SingleProductPage() {
           status: 'success',
           isClosable:true
         })
-        axios.post(`http://localhost:8080/cart/${id}`,{},{
+        axios.post(`${process.env.REACT_APP_CART_URL}${id}`,{},{
               headers:{
             'authorization':"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiI2MzllMDJjOTM1ZTZkNGQ1NWRlNGI4MWMiLCJpYXQiOjE2NzEyOTk5NDV9.l43Xnbt_G2o4ZPCg5ENKPsa0ahGNMfOxH1mowCt-sKU"
           }
@@ -36,7 +36,7 @@ function SingleProductPage() {
     const [product, setProduct] = useState({});
 
     useEffect(() => {
-        axios.get(`http://localhost:8080/${category}/${id}`).then((res) => {
+        axios.get(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}${category}/${id}`).then((res) => {
             console.log(res);
             setProduct(res.data);
         }).catch(err => console.log(err))

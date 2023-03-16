@@ -27,7 +27,7 @@ export const checkAuthenticaion = {
 export const userSignup = (payload) => async (dispatch) => {
   dispatch(isAuthLoding);
   return axios
-    .post(`http://localhost:8080/usersData`, payload)
+    .post(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}usersData`, payload)
     .then(({ data }) => {
       dispatch(isAuthSuccess(data));
     });
@@ -38,9 +38,10 @@ export const userLogin = (payload) => async (dispatch) => {
   console.log(payload);
   console.log("Making post request");
   axios
-    .post("http://localhost:8080/user/login", payload)
+    .post(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}user/login`, payload)
     .then((res) => {
       dispatch(isAuthSuccess(res.data));
+      window.location.reload(true)
     })
     .catch((err) => {
       dispatch(isAuthFailed);
@@ -51,7 +52,7 @@ export const userLogin = (payload) => async (dispatch) => {
 // export const getUserData = (token) => async (dispatch) => {
 //   dispatch(isAuthLoding);
 //   return axios
-//     .get(`http://localhost:8080/usersData/${token}`)
+//     .get(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}usersData/${token}`)
 //     .then(({ data }) => {
 //       dispatch(isAuthSuccess(data));
 //     })

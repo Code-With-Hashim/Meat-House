@@ -133,7 +133,8 @@ const Homepage = () => {
         </Box>
       </Box>
 
-      <MultipleItems  />
+      {/* //comment right now */}
+      {/* <MultipleItems  /> */}
 
       <ShopByCat title={"Explore By Category"} />
       <Blogs />

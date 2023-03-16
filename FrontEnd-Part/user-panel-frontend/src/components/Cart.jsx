@@ -49,7 +49,7 @@ const Cart = ({ setCartreload }) => {
 
     console.log(payload);
     axios
-      .post(`http://localhost:8080/cart/${id}`, payload, {
+      .post(`${process.env.REACT_APP_CART_URL}${id}`, payload, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {
@@ -63,7 +63,7 @@ const Cart = ({ setCartreload }) => {
 
     console.log(payload);
     axios
-      .post(`http://localhost:8080/cart/${id}`, payload, {
+      .post(`${process.env.REACT_APP_CART_URL}${id}`, payload, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {
@@ -75,7 +75,7 @@ const Cart = ({ setCartreload }) => {
   const handleDelete = (id) => {
     console.log(id);
     axios
-      .delete(`http://localhost:8080/cart/${id}`, {
+      .delete(`${process.env.REACT_APP_CART_URL}${id}`, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {
@@ -87,7 +87,7 @@ const Cart = ({ setCartreload }) => {
 
   const getData = async () => {
     await axios
-      .get("http://localhost:8080/cart", {
+      .get(`${process.env.REACT_APP_CART_URL}`, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {
@@ -106,41 +106,11 @@ const Cart = ({ setCartreload }) => {
     setStcart(CART_ITEM);
     console.log(subTotal);
   }, [cartlength, qty, setQty, delete1, stcart,cartrender]);
-  return (
-    <>
-      <Image
-        ref={btnRef}
-        onClick={onOpen}
-        src="https://www.licious.in/img/rebranding/cart_icon.svg"
-      />
 
-      <Drawer
-        isOpen={isOpen}
-        placement="right"
-        onClose={onClose}
-        finalFocusRef={btnRef}
-        size="sm"
-      >
-        <DrawerOverlay />
-        <DrawerContent backgroundColor="#fbfbfb">
-          <DrawerHeader>
-            <span>
-              <ImCancelCircle
-                style={{
-                  marginLeft: "-70px",
-                  fontSize: "35px",
-                  color: "white",
-                  cursor: "pointer",
-                }}
-                onClick={onClose}
-              />
-            </span>
-            <Text fontWeight="bold" fontSize="25px" marginTop="-35px">
-              Order Summary
-            </Text>
-          </DrawerHeader>
-
-          <DrawerBody>
+  const SomethingInCart=()=>{
+    return(
+      <>
+      <DrawerBody>
             <VStack
               divider={<StackDivider borderColor="gray.200" />}
               spacing={4}
@@ -151,14 +121,12 @@ const Cart = ({ setCartreload }) => {
                   Congratulations, Your delivery charge is waived off!!!
                 </Text>
               </Box>
-
               <Box className={sa.discount_banner2}>
                 <Text fontSize="13px" textAlign="center">
                   Congratulations! You've saved ₹20
                 </Text>
               </Box>
             </VStack>
-
             {/* .............CartData ...........*/}
             <Box>
               <>
@@ -170,7 +138,7 @@ const Cart = ({ setCartreload }) => {
                           <Text
                             textAlign="center"
                             boxSize="30px"
-                            backgroundColor="#f2f2f2"
+                            backgroundColor="#F2F2F2"
                             fontSize="16px"
                           >
                             {i + 1}
@@ -198,7 +166,7 @@ const Cart = ({ setCartreload }) => {
                             {el.net_weight}
                           </Text>
                           <Text
-                            color="#d11243"
+                            color="#D11243"
                             alignItems="baseline"
                             justifyContent="center"
                             display="flex"
@@ -245,7 +213,6 @@ const Cart = ({ setCartreload }) => {
               </>
             </Box>
             {/* .............CartData end...........*/}
-
             <Join />
             <CartAdd />
             {/*................ TotalAmount ........*/}
@@ -285,7 +252,7 @@ const Cart = ({ setCartreload }) => {
                       display="flex"
                     >
                       <Text>Delevery charge</Text>
-                      <Text>50</Text>
+                      <Text>0</Text>
                     </Box>
                     <Box
                       fontSize="12px"
@@ -296,7 +263,6 @@ const Cart = ({ setCartreload }) => {
                       <Text>0</Text>
                     </Box>
                     <hr />
-
                     <Box
                       fontWeight="bold"
                       fontSize="12px"
@@ -306,7 +272,7 @@ const Cart = ({ setCartreload }) => {
                       <Text>Total</Text>
                       <Text alignItems="center" display="flex">
                         <BiRupee />
-                        <Subtotal cart={cart} Ship={50} />
+                        <Subtotal cart={cart} Ship={0} />
                       </Text>
                     </Box>
                   </Box>
@@ -358,7 +324,7 @@ const Cart = ({ setCartreload }) => {
                       alignItems="center"
                       display="flex"
                     >
-                      Total: <BiRupee /> <Subtotal cart={cart} Ship={50} />
+                      Total: <BiRupee /> <Subtotal cart={cart} Ship={0} />
                     </Text>
                     <Link to="/summary"><Button colorScheme="red">Proceed to checkout</Button></Link>
                   </Box>
@@ -366,7 +332,58 @@ const Cart = ({ setCartreload }) => {
               </>
             </Box>
             {/* BottomCard End*/}
-          </DrawerBody>
+          </DrawerBody></>
+    )
+  }
+
+  const EpmtyCart=()=>{
+    return(
+      <>
+      <Box alignContent="center" justifyContent="centre" flexDirection="column" display="flex">
+        <Image w='80%' m='auto' src="https://www.licious.in/img/rebranding/empty_cart_icon.png"/>
+        <Text  fontStyle="bold" textAlign="center">Your cart awaits your next meal</Text>
+        <Box   onClick={onClose} justifyContent="center" display="flex"><Link _focus={false}  to="/"  ><Button   colorScheme="red">Continue Shopping</Button></Link></Box>
+      </Box>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <Image
+        ref={btnRef}
+        onClick={onOpen}
+        src="https://www.licious.in/img/rebranding/cart_icon.svg"
+      />
+
+      <Drawer
+        isOpen={isOpen}
+        placement="right"
+        onClose={onClose}
+        finalFocusRef={btnRef}
+        size="sm"
+      >
+        <DrawerOverlay />
+        <DrawerContent backgroundColor="#fbfbfb">
+          <DrawerHeader>
+            <span>
+              <ImCancelCircle
+                style={{
+                  marginLeft: "-70px",
+                  fontSize: "35px",
+                  color: "white",
+                  cursor: "pointer",
+                }}
+                onClick={onClose}
+              />
+            </span>
+            <Text fontWeight="bold" fontSize="25px" marginTop="-35px">
+              Order Summary
+            </Text>
+          </DrawerHeader>
+          {
+            cart.length === 0 ? <EpmtyCart /> : <SomethingInCart />
+           }
         </DrawerContent>
       </Drawer>
     </>
@@ -387,7 +404,7 @@ const Cart = ({ setCartreload }) => {
 
 //     console.log(payload);
 //     axios
-//       .post(`http://localhost:8080/cart/${id}`, payload, {
+//       .post(``${process.env.REACT_APP_CART_URL}`${id}`, payload, {
 //         headers: { Authorization: AuthStr },
 //       })
 //       .then((res) => {
@@ -401,7 +418,7 @@ const Cart = ({ setCartreload }) => {
 
 //     console.log(payload);
 //     axios
-//       .post(`http://localhost:8080/cart/${id}`, payload, {
+//       .post(``${process.env.REACT_APP_CART_URL}`${id}`, payload, {
 //         headers: { Authorization: AuthStr },
 //       })
 //       .then((res) => {
@@ -413,7 +430,7 @@ const Cart = ({ setCartreload }) => {
 //   const handleDelete = (id) => {
 //     console.log(id);
 //     axios
-//       .delete(`http://localhost:8080/cart/${id}`, {
+//       .delete(``${process.env.REACT_APP_CART_URL}`${id}`, {
 //         headers: { Authorization: AuthStr },
 //       })
 //       .then((res) => {
@@ -438,7 +455,7 @@ const Cart = ({ setCartreload }) => {
 
 //   const getData = async () => {
 //     await axios
-//       .get("http://localhost:8080/cart", {
+//       .get(`${process.env.REACT_APP_CART_URL}`, {
 //         headers: { Authorization: AuthStr },
 //       })
 //       .then((res) => {
@@ -567,6 +584,7 @@ const Cart = ({ setCartreload }) => {
 
 // </>
 // y
+
 const Join = () => {
   return (
     <>
@@ -663,7 +681,7 @@ const BottomCart = () => {
   const AuthStr = `Bearer ${USER_TOKEN}`;
   const getData = async () => {
     await axios
-      .get("http://localhost:8080/cart", {
+      .get(`${process.env.REACT_APP_CART_URL}`, {
         headers: { Authorization: AuthStr },
       })
       .then((res) => {

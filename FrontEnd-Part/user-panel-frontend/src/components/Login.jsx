@@ -42,12 +42,62 @@ export function DrawerExample({ onOpen, isOpen, onClose, btnRef }) {
       [name]: value,
     });
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(data);
-    axios.post("http://localhost:8080/user/signup", data).then((res) => {
-      console.log(res);
-    });
+
+    try {
+
+      if (data.email === "" || data.password === "") {
+        toast({
+          position: "top",
+          variant: "subtle",
+          title: "Please filled Mandatory field",
+          status: "error",
+          isClosable: true,
+        });
+        // setLoading(false)
+      } else if (!data.email.includes("@") || !data.email.includes(".com")) {
+        toast({
+          position: "top",
+          variant: "subtle",
+          title: "Please Enter a Valid Email Address",
+          status: "error",
+          isClosable: true,
+        });
+        // setLoading(false)
+        console.log(data.email);
+      } else if (data.password.length <= 5) {
+        toast({
+          position: "top",
+          variant: "subtle",
+          title: "Please make a strong password max-length - 5",
+          status: "error",
+          isClosable: true,
+        });
+        // setLoading(false)
+        console.log(data.email);
+      } else {
+        axios.post(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}user/signup`, data);
+        toast({
+          position: "top",
+          variant: "subtle",
+          title: "Sign Up Successfully",
+          status: "success",
+          isClosable: true,
+        });
+
+      }
+    } catch (error) {
+
+      toast({
+        position: "top",
+        variant: "subtle",
+        title: "Sign Up Successfully",
+        status: "success",
+        isClosable: true,
+      })
+
+    }
   };
 
   const handleChange = (e) => {
@@ -71,7 +121,7 @@ export function DrawerExample({ onOpen, isOpen, onClose, btnRef }) {
       })
       .catch((err) => {
         toast({
-          title: "Invalid email address or password",
+          title: "Something went wrong please try again",
           status: "error",
           isClosable: true,
         });

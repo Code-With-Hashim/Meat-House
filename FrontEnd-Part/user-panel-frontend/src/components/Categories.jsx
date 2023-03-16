@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Text } from '@chakra-ui/react'
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 function Categories({ category, handleClick, query, SearchData }) {
     console.log({ "Data": SearchData });
     const [count, setCount] = useState(0);
     const [data, setData] = useState([]);
+    const USER_TOKEN = useSelector((store) => store.AuthReducer.token);
+    const AuthStr = `Bearer ${USER_TOKEN}`;
     function find() {
         console.log("Yes");
         if (query !== null) {
@@ -22,8 +25,9 @@ function Categories({ category, handleClick, query, SearchData }) {
     console.log("=====");
     console.log(count);
     console.log("=====");
+    console.log()
     useEffect(() => {
-        axios.get(`http://localhost:8080/${category}`).then(res => {
+        axios.get(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}${window.location.pathname.split("/")[1]}`).then(res => {
             setData(res.data)
         }).catch(err => console.log(err));
     }, [])

@@ -66,17 +66,22 @@ export const SingleUser = () => {
 
                             if (i.UserAddress) {
                                 return (
-                                    <CardBody>
-                                        <Text fontSize='2xl'>
-                                            User Address : -  {i.UserAddress.address == undefined || "" ? "Not Updated" : i.UserAddress.address}
-                                        </Text>
-                                        <Text fontSize='2xl'>
-                                            Fetch Location : - {i.UserAddress.fetchLocation == undefined || "" ? "Not Updated" : i.UserAddress.fetchLocation}
-                                        </Text>
-                                    </CardBody>
+                                    <Card mt='5'>
+                                        <CardHeader>
+                                            <Heading size='md'>Delivery Address of User</Heading>
+                                        </CardHeader>
+                                        <CardBody>
+                                            <Text>Mobile No : - {i.UserAddress.address.mobile === undefined || i.UserAddress.address.mobile === "" ? "Not Update" : i.UserAddress.address.mobile}</Text>
+                                            <Text>Flat No : - {i.UserAddress.address.flat === undefined || i.UserAddress.address.flat === "" ? "Not Update" : i.UserAddress.address.flat}</Text>
+                                            <Text>Location : - {i.UserAddress.address.location === undefined || i.UserAddress.address.location === "" ? "Not Update" : i.UserAddress.address.location}</Text>
+
+                                            <Text>Land Mark : - {i.UserAddress.address.landmark === undefined || i.UserAddress.address.landmark === "" ? 'Not Update' : i.UserAddress.address.landmark} </Text>
+                                        </CardBody>
+                                    </Card>
                                 )
 
                             }
+
 
                             if (i.UserCart) {
                                 return (<Box mt='10'>
@@ -95,7 +100,7 @@ export const SingleUser = () => {
                                                             <Stack mt='6' spacing='3'>
                                                                 <Heading size='md'>{i.product_name}</Heading>
                                                                 <Text>
-                                                                   {i.item_desc}
+                                                                    {i.item_desc}
                                                                 </Text>
                                                                 <Text color='blue.600' fontSize='2xl'>
                                                                     {i.rupee}

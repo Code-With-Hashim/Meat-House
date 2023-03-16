@@ -17,6 +17,8 @@ import {
 } from '@chakra-ui/react'
 import { Categories } from '../components/Categories';
 import { ProductCard } from '../components/Card';
+import { useDispatch, useSelector } from 'react-redux';
+import { cartData } from '../redux/AppReducer/Action';
 /*
   This function or page is suppose to make an api request on load with passed Category and after having the data from data base we are going to Show that perticular UI Component.
 
@@ -35,40 +37,36 @@ import { ProductCard } from '../components/Card';
   "gender":"Male",
   "meritalStatus":"Single"
 }
-
-
 */
-// So, for making the patch request we have to pass autherization token in headers then we can do what ever
-export const Addtocartfun = (id)=> {
-  // alert(id);
-  axios.post(`http://localhost:8080/cart/${id}`,{},{
-    // this token should come from the localstorage
-        headers:{
-      'authorization':"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiI2MzllMDJjOTM1ZTZkNGQ1NWRlNGI4MWMiLCJpYXQiOjE2NzEyOTk5NDV9.l43Xnbt_G2o4ZPCg5ENKPsa0ahGNMfOxH1mowCt-sKU"
-    }
-  }).then((res)=>{
-    console.log(res);
-  }).catch(err=>console.log(err));
-}
+
+
 
 function CategoryPage() {
+  const car=useSelector((store)=>store.AppReducer.cart)
+  const USER_TOKEN = useSelector((store) => store.AuthReducer.token);
+  const AuthStr = `Bearer ${USER_TOKEN}`;
   const Toast = useToast();
+
+  const dispatch = useDispatch()
+
   function PatchRequest(id){
+    console.log(car)
     console.log(id);
-      Toast({
-        title:"Added Successfully"+id,
-        position: 'bottom',
-        status: 'success',
-        isClosable:true
-      })
-      axios.post(`http://localhost:8080/cart/${id}`,{},{
-        // this token should come from the localstorage
-            headers:{
-          'authorization':"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VySUQiOiI2MzllMDJjOTM1ZTZkNGQ1NWRlNGI4MWMiLCJpYXQiOjE2NzEyOTk5NDV9.l43Xnbt_G2o4ZPCg5ENKPsa0ahGNMfOxH1mowCt-sKU"
-        }
+      
+      axios.post(`${process.env.REACT_APP_CART_URL}${id}`,{},{
+        headers: { Authorization: AuthStr },
+        
       }).then((res)=>{
+        Toast({
+          title:"Added Successfully",
+          position: 'bottom',
+          status: 'success',
+          isClosable:true
+        })
+        dispatch(cartData(!car))
         console.log(res);
       }).catch(err=>console.log(err));
+      
   }
 
   // ?od=1234234
@@ -79,13 +77,14 @@ function CategoryPage() {
   const [data, setData] = useState([]);
   const [dataSearch,setDataSearch] = useState([]);
   function handleClick(id){
-    axios.get(`http://localhost:8080/${Category.category}?category_id=${id}`).then(res=>{
+    axios.get(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}${Category.category}?category_id=${id}`).then(res=>{
       setData(res.data.Food_list)
+      // console.log(res)
       // console.log(data);
     }).catch(err =>console.log(err));
   }
   useEffect(() => {
-    axios.get(`http://localhost:8080/${Category.category}`).then(res=>{
+    axios.get(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}${Category.category}`).then(res=>{
       setData(res.data[0].Food_list); 
       setDataSearch(res.data);
       }).catch(err=>console.log(err));

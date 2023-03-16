@@ -57,7 +57,7 @@ export const AdminNavbar = () => {
                     placement='top-start'
                 >
                     <PopoverTrigger>
-                        <Avatar ml='10' name={adminDetail.email} src='https://bit.ly/broken-link' />
+                        <Avatar ml='10' name={adminDetail && adminDetail.email ? adminDetail.email : ""} src='https://bit.ly/broken-link' />
                     </PopoverTrigger>
                     <PopoverContent color='white' bg='blue.800' borderColor='blue.800'>
                         <PopoverHeader pt={4} fontWeight='bold' border='0'>

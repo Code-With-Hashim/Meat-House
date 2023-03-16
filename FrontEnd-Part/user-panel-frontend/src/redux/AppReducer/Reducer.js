@@ -16,6 +16,7 @@ function Reducer(state = initialState, { type, payload }) {
     case ways.GET_DATA_FAILURE:
       return { ...state, isError: false, data: [], isLoding: false };
       case ways.POST_CART_SUCCESS:
+        console.log(payload)
       return { ...state, isLoding: false, isError: false, cart: payload };
     default:
       return state;

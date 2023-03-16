@@ -45,7 +45,7 @@ const MultipleItems = () => {
     })
     await axios
       .post(
-        `http://localhost:8080/cart/${id}`,
+        `${process.env.REACT_APP_CART_URL}${id}`,
         {},
         {
           headers: { Authorization: AuthStr },

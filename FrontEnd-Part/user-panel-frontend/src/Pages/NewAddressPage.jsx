@@ -29,10 +29,10 @@ const NewAddress = () => {
   const updateuser = () => {
     console.log(inpval);
    
-    axios.post(`http://localhost:8080/address`, inpval, {
+    axios.post(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}address`, inpval, {
       headers: { Authorization: AuthStr },
     }).then((res)=>{
-        console.log(res)
+        console.log(res.data)
     })
   };
 
@@ -69,7 +69,7 @@ const NewAddress = () => {
               variant="flushed"
               placeholder="Flat No/Building Name"
               size="lg"
-              name="flat"
+              name="flatno"
               onChange={handlechange}
             />
             <hr />
