@@ -33,6 +33,10 @@ import { getData } from "../redux/AppReducer/Action";
 import Cart from "./Cart";
 import { cat } from "../Utils/Constants";
 import { Link } from "react-router-dom";
+import {ImLocation2 , ImStack} from "react-icons/im"
+import {AiOutlineDown, AiOutlineSearch , AiOutlineShoppingCart} from "react-icons/ai";
+import {CiLogin} from "react-icons/ci";
+import {RxAvatar} from "react-icons/rx"
 
 const Navbar = () => {
   const [city, setCity] = useState();
@@ -97,21 +101,13 @@ const Navbar = () => {
             <Spacer />
 
             <Box display="flex" gap={2}>
-              <Image
-                boxSize="20px"
-                src="https://www.licious.in/img/rebranding/location_icon.svg"
-                alt="."
-              />
+              <ImLocation2 fontSize={'20px'} />
               <Text fontSize="xs" cursor="pointer">
                 {city1}
               </Text>
               <Menu closeOnSelect={false}>
                 <MenuButton>
-                  <Image
-                    mt="1px"
-                    boxSize="8px"
-                    src="https://www.licious.in/img/rebranding/down-arrow.png"
-                  />
+                  <AiOutlineDown />
                 </MenuButton>
                 <MenuList width="800px">
                   <Box padding="2rem" backgroundColor="#F7F6F6">
@@ -149,22 +145,14 @@ const Navbar = () => {
                 />
                 <InputRightElement
                   children={
-                    <Image
-                      boxSize="20px"
-                      src="https://www.licious.in/img/rebranding/search_icon.svg"
-                      alt="."
-                    />
+                    <AiOutlineSearch fontSize={'20px'} />
                   }
                 />
               </InputGroup>
               {/* </Box> */}
               <Spacer />
               <Box display="flex" gap={2} cursor="pointer">
-                <Image
-                  boxSize="20px"
-                  src="https://www.licious.in/img/rebranding/category-dropdown-icon.svg"
-                  alt="."
-                />
+                <ImStack fontSize={'20px'} />
                 <Menu>
                   <MenuButton>
                     <Text fontSize="xs">Categories</Text>
@@ -176,13 +164,11 @@ const Navbar = () => {
               <Box display="flex" gap={2} cursor="pointer">
                 {isAuth ? (
                   <>
-                    <Image
-                      boxSize="20px"
-                      src="https://www.licious.in/img/rebranding/profile_icon.svg"
-                      alt="."
-                    />
+                  
                     <Menu>
+                    <RxAvatar fontSize={'20px'} />
                       <MenuButton>
+                      
                         <Text fontSize="xs">Profile</Text>
                       </MenuButton>
                       <MenuList>
@@ -204,11 +190,7 @@ const Navbar = () => {
                   </>
                 ) : (
                   <>
-                    <Image
-                      boxSize="20px"
-                      src="https://www.licious.in/img/rebranding/profile_icon.svg"
-                      alt="."
-                    />
+                    <CiLogin fontSize={'20px'} />
 
                     <Text fontSize="xs" ref={btnRef} onClick={onOpen}>
                       Login
@@ -224,11 +206,6 @@ const Navbar = () => {
               />
               <Spacer />
               <Box display="flex" gap={2} cursor="pointer">
-                {/* <Image
-                  boxSize="20px"
-                  src="https://www.licious.in/img/rebranding/cart_icon.svg"
-                  alt="."
-                /> */}
 
                 <Cart />
 
@@ -322,11 +299,7 @@ const Navbar = () => {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Image
-                  boxSize="20px"
-                  src="https://www.licious.in/img/rebranding/profile_icon.svg"
-                  alt="."
-                />
+                <RxAvatar fontSize={'20px'} />
                 <Menu>
                   <MenuButton>
                     <Text fontSize="xs">Profile</Text>
@@ -353,11 +326,7 @@ const Navbar = () => {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Image
-                  boxSize="20px"
-                  src="https://www.licious.in/img/rebranding/cart_icon.svg"
-                  alt="."
-                />
+               <AiOutlineShoppingCart fontSize={'20px'} />
                 <Text fontSize="xs">Cart</Text>
               </Box>
             </Flex>

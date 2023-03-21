@@ -28,21 +28,16 @@ const settings = {
   slidesToScroll: 3,
 };
 const MultipleItems = () => {
-  const car=useSelector((store)=>store.AppReducer.cart)
-  console.log(car)
-    const toast = useToast()
+  const car = useSelector((store) => store.AppReducer.cart)
+  const token = localStorage.getItem("token");
+ 
+  // console.log(car)
+  const toast = useToast()
   const dispatch = useDispatch();
   const PatchRequest = async (id) => {
-    const token = JSON.parse(localStorage.getItem("token"));
     const AuthStr = `Bearer ${token}`;
 
-    toast({
-      title: 'Product Added.',
-
-      status: 'success',
-      duration: 2000,
-      isClosable: true,
-    })
+  
     await axios
       .post(
         `${process.env.REACT_APP_CART_URL}${id}`,
@@ -52,14 +47,27 @@ const MultipleItems = () => {
         }
       )
       .then((res) => {
-        console.log(res);
-        
-      })
-      .catch((err) => console.log(err));
+        console.log(res)
+        toast({
+          title: 'Product Added.',
+    
+          status: 'success',
+          duration: 2000,
+          isClosable: true,
+        })
 
-      dispatch(cartData(!car));
+      })
+      .catch((err) => 
+      toast({
+        title: 'Product is Alredy exist in cart',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      }));
+
+    dispatch(cartData(!car));
   };
-  
+
   return (
     <Box maxWidth="100%" mt="2rem">
       <Box mx="8%">

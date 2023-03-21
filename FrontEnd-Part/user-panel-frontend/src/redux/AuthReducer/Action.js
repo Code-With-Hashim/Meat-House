@@ -5,11 +5,12 @@ const isAuthLoding = {
   type: type.GET_AUTH_REQUEST,
 };
 
-const isAuthSuccess = (payload) => {
-  return {
+const isAuthSuccess = (value) => (dispatch) => {
+  // console.log(value , dispatch)
+  dispatch({
     type: type.GET_AUTH_SUCCESS,
-    payload: payload,
-  };
+    payload: value
+  })
 };
 
 export const isAuthFailed = {
@@ -30,23 +31,47 @@ export const userSignup = (payload) => async (dispatch) => {
     .post(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}usersData`, payload)
     .then(({ data }) => {
       dispatch(isAuthSuccess(data));
+    }).catch((err) => {
+      dispatch(isAuthFailed)
     });
 };
 
-export const userLogin = (payload) => async (dispatch) => {
+export const userLogin = (payload, toast, onclose, navigate) => async (dispatch) => {
   dispatch(isAuthLoding);
-  console.log(payload);
-  console.log("Making post request");
-  axios
-    .post(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}user/login`, payload)
-    .then((res) => {
-      dispatch(isAuthSuccess(res.data));
-      window.location.reload(true)
-    })
-    .catch((err) => {
-      dispatch(isAuthFailed);
-      throw err;
+
+
+  try {
+
+    const { data } = await axios.post(`${process.env.REACT_APP_MEAT_HOUSE_BASE_URL}user/login`, payload)
+
+    dispatch(isAuthSuccess(data))
+
+    toast({
+      position: "top",
+      variant: "subtle",
+      title: "Login Successfully",
+      status: "success",
+      isClosable: true,
     });
+
+    navigate("/")
+    onclose()
+
+
+  } catch (error) {
+    console.log(error)
+    dispatch(isAuthFailed)
+
+
+    toast({
+      position: "top",
+      variant: "subtle",
+      title: "Something went wrong , Please try again",
+      status: "error",
+      isClosable: true,
+    });
+  }
+
 };
 
 // export const getUserData = (token) => async (dispatch) => {

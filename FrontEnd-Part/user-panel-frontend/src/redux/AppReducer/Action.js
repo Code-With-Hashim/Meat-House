@@ -35,18 +35,18 @@ export const getData = (payload) => (dispatch) => {
   // });
 };
 export const cartData = (payload) => (dispatch) => {
-  // const USER_TOKEN = useSelector((store) => store.AuthReducer.token);
-  // const AuthStr = `Bearer ${USER_TOKEN}`;
+  const USER_TOKEN = useSelector((store) => store.AuthReducer.token);
+  const AuthStr = `Bearer ${USER_TOKEN}`;
   console.log("Dispatch");
   dispatch(isData(payload))
-  // return axios
-  //   .get(`${process.env.REACT_APP_CART_URL}`, {
-  //     headers: { Authorization: AuthStr },
-  //   })
-  //   .then((res) => {
-  //     return dispatch(isData(res.data.Cart));
-  //   })
-  //   .catch((err) => {
-  //     dispatch(isDataLodingFailed);
-  //   });
+  return axios
+    .get(`${process.env.REACT_APP_CART_URL}`, {
+      headers: { Authorization: AuthStr },
+    })
+    .then((res) => {
+      return dispatch(isData(res.data.Cart));
+    })
+    .catch((err) => {
+      dispatch(isDataLodingFailed);
+    });
 };

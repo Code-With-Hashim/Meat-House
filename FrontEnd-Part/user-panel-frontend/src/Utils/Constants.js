@@ -119,7 +119,7 @@ export const bestcat=[
           "product_id": "9lc7t9coklbpd4xrx",
           "product_image_src": "https://dao54xqhg9jfa.cloudfront.net/OMS-ProductMerchantdising/a44670fd-cdb5-30d3-9326-ccd6ab1c5471/original/WhatsApp_Image_2022-06-08_at_4.19.42_PM.jpeg",
           "cta_text": "The Safest Mutton in Town",
-          "product_name": "Lamb Boneless",
+          "product_name": "less",
           "item_desc": "Tender, boneless, evenly-cut chunks of velvety, lean lamb meat taken from the hind leg.",
           "net_weight": "450gms",
           "rupee": "₹915",

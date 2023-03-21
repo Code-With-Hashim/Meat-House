@@ -19,29 +19,26 @@ import {
   VStack,
   StackDivider,
   Image,
+  Icon,
 } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Subtotal from "./Subtotal";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 
 const Cart = ({ setCartreload }) => {
   const cartrender = useSelector((store) => store.AppReducer.cart);
-  console.log(cartrender)
   let Shipping = 50;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
-  // cartdata
   const [cart, setCart] = useState([]);
   const [qty, setQty] = useState(1);
   const [delete1, setDelete] = useState(true);
-  const [subTotal, setSubTotal] = useState(0);
   const [cartlength, setCartlength] = useState(0);
   const [stcart, setStcart] = useState([]);
-  const CART_ITEM = useSelector((store) => store.AppReducer.cart);
-  console.log(CART_ITEM);
+
   const USER_TOKEN = useSelector((store) => store.AuthReducer.token);
   const AuthStr = `Bearer ${USER_TOKEN}`;
-  console.log(cart);
   const handleReduce = ({ id, Q }) => {
     const payload = {
       quantity: Number(Q - 1),
@@ -98,14 +95,20 @@ const Cart = ({ setCartreload }) => {
       
   };
 
+  const handleOpen = () => {
+    getData()
+    setStcart(!cartrender)
+    onOpen()
+  }
+
   useEffect(() => {
     getData();
     // if(cart.length!=0){
     //   total(cart);
     // }
-    setStcart(CART_ITEM);
-    console.log(subTotal);
-  }, [cartlength, qty, setQty, delete1, stcart,cartrender]);
+    // console.log(subTotal);
+  }, [cartlength, qty, setQty, delete1, stcart,cartrender ]);
+
 
   const SomethingInCart=()=>{
     return(
@@ -340,7 +343,7 @@ const Cart = ({ setCartreload }) => {
     return(
       <>
       <Box alignContent="center" justifyContent="centre" flexDirection="column" display="flex">
-        <Image w='80%' m='auto' src="https://www.licious.in/img/rebranding/empty_cart_icon.png"/>
+      <Box display='flex' justifyContent={'center'} alignItems='center' ><Icon as={AiOutlineShoppingCart} fontSize='200px'  /></Box>
         <Text  fontStyle="bold" textAlign="center">Your cart awaits your next meal</Text>
         <Box   onClick={onClose} justifyContent="center" display="flex"><Link _focus={false}  to="/"  ><Button   colorScheme="red">Continue Shopping</Button></Link></Box>
       </Box>
@@ -350,11 +353,8 @@ const Cart = ({ setCartreload }) => {
 
   return (
     <>
-      <Image
-        ref={btnRef}
-        onClick={onOpen}
-        src="https://www.licious.in/img/rebranding/cart_icon.svg"
-      />
+      <AiOutlineShoppingCart  ref={btnRef}
+        onClick={handleOpen} fontSize={'20px'} />
 
       <Drawer
         isOpen={isOpen}
@@ -389,201 +389,7 @@ const Cart = ({ setCartreload }) => {
     </>
   );
 };
-// const CartData = () => {
-//   const [cart, setCart] = useState([]);
-//   const [qty, setQty] = useState(1);
-//   const [subTotal, setSubTotal] = useState(0);
-//   const [cartlength, setCartlength] = useState(0);
-//   const USER_TOKEN = useSelector((store) => store.AuthReducer.token);
-//   const AuthStr = `Bearer ${USER_TOKEN}`;
-//   console.log(cart);
-//   const handleReduce = ({ id, Q }) => {
-//     const payload = {
-//       quantity: Number(Q - 1),
-//     };
 
-//     console.log(payload);
-//     axios
-//       .post(``${process.env.REACT_APP_CART_URL}`${id}`, payload, {
-//         headers: { Authorization: AuthStr },
-//       })
-//       .then((res) => {
-//         setQty((prev) => prev + 1);
-//       });
-//   };
-//   const handleAdd = ({ id, Q }) => {
-//     const payload = {
-//       quantity: Number(Q + 1),
-//     };
-
-//     console.log(payload);
-//     axios
-//       .post(``${process.env.REACT_APP_CART_URL}`${id}`, payload, {
-//         headers: { Authorization: AuthStr },
-//       })
-//       .then((res) => {
-//         console.log(res);
-//         setQty((prev) => prev + 1);
-//       });
-//   };
-
-//   const handleDelete = (id) => {
-//     console.log(id);
-//     axios
-//       .delete(``${process.env.REACT_APP_CART_URL}`${id}`, {
-//         headers: { Authorization: AuthStr },
-//       })
-//       .then((res) => {
-//         setCart(res.data.Cart);
-//         setCartlength(cart.length);
-//       });
-//   };
-
-//   // const splitrs = (str) => {
-//   //   str = str.split("₹");
-//   //   return +str[1];
-//   // };
-//   // const total = () => {
-//   //   var final = 0;
-//   //   var sum = 0;
-//   //   cart.forEach((el) => {
-//   //     sum = el.quantity * splitrs(el.rupee);
-//   //     final = final + sum;
-//   //   });
-//   //   return final;
-//   // };
-
-//   const getData = async () => {
-//     await axios
-//       .get(`${process.env.REACT_APP_CART_URL}`, {
-//         headers: { Authorization: AuthStr },
-//       })
-//       .then((res) => {
-//         setCart(res.data.Cart);
-//         // total(cart);
-//       })
-//       .then((res) => {
-//         // setSubTotal(total(cart));
-//       });
-//   };
-
-//   useEffect(() => {
-//     getData();
-//     // if(cart.length!=0){
-//     //   total(cart);
-//     // }
-//     console.log(subTotal);
-//   }, [cartlength, qty, setQty]);
-//   return (
-//     <>
-//       {cart &&
-//         cart.map((el, i) => (
-//           <Box className={sa.added_product} key={el.product_id}>
-//             <Box display="flex" justifyContent="space-between">
-//               <Box display="flex" gap="20px">
-//                 <Text
-//                   textAlign="center"
-//                   boxSize="30px"
-//                   backgroundColor="#f2f2f2"
-//                   fontSize="16px"
-//                 >
-//                   {i + 1}
-//                 </Text>
-//                 <Text fontWeight="bold" fontSize="16px" color="black">
-//                   {el.product_name}
-//                 </Text>
-//               </Box>
-//               <Box>
-//                 <RxCross1 onClick={() => handleDelete(el.product_id)} />
-//               </Box>
-//             </Box>
-//             <Box display="flex" justifyContent="space-between">
-//               <Box display="flex" gap="10px" marginLeft="50px">
-//                 <Text
-//                   color="blackAlpha.700"
-//                   borderRadius="5px"
-//                   padding="0px 10px 0px 10px"
-//                   height="fit-content"
-//                   fontSize="14px"
-//                   border="1px solid black"
-//                 >
-//                   {el.net_weight}
-//                 </Text>
-//                 <Text
-//                   color="#d11243"
-//                   alignItems="baseline"
-//                   justifyContent="center"
-//                   display="flex"
-//                 >
-//                   <BiRupee fontSize="13px" />
-//                   {el.rupee}
-//                 </Text>
-//                 <Text
-//                   color="blackAlpha.600"
-//                   alignItems="baseline"
-//                   display="flex"
-//                   textDecoration="line-through"
-//                 >
-//                   <BiRupee fontSize="13px" />
-//                   {el.rupee_3}
-//                 </Text>
-//               </Box>
-//               <Box justifyItems="center" gap="2px" display="flex">
-//                 <Button
-//                   boxSize="20px"
-//                   onClick={() =>
-//                     handleReduce({ id: el.product_id, Q: el.quantity })
-//                   }
-//                 >
-//                   -
-//                 </Button>
-//                 <Text>{el.quantity}</Text>
-//                 <Button
-//                   boxSize="20px"
-//                   onClick={() =>
-//                     handleAdd({ id: el.product_id, Q: el.quantity })
-//                   }
-//                 >
-//                   +
-//                 </Button>
-//               </Box>
-//             </Box>
-//             <hr />
-//           </Box>
-//         ))}
-//     </>
-//   );
-// };
-
-// <>
-//   <Box className={sa.added_product}>
-//     <Box display="flex" justifyContent="space-between">
-//       <Box display="flex" gap="20px" >
-//         <Text textAlign="center" boxSize="30px" backgroundColor="#f2f2f2" fontSize="16px">1</Text>
-//         <Text fontWeight="bold" fontSize="16px" color="black">Chicken Curry Cut large </Text>
-
-//       </Box>
-//       <Box><RxCross1 /></Box>
-//     </Box>
-//     <Box display="flex" justifyContent="space-between">
-//       <Box display="flex" gap="10px" marginLeft="50px">
-//         <Text color="blackAlpha.700" borderRadius="5px" padding="0px 10px 0px 10px" height="fit-content" fontSize="14px" border="1px solid black">500gms</Text>
-//         <Text color="#d11243" alignItems="baseline" justifyContent="center" display="flex"><BiRupee fontSize="13px" />322</Text>
-//         <Text color="blackAlpha.600" alignItems="baseline" display="flex" textDecoration="line-through"><BiRupee fontSize="13px" />200</Text>
-//       </Box>
-//       <Box justifyItems="center" gap="2px" display="flex">
-
-//         <Button boxSize="20px">-</Button>
-//         <Text>1</Text>
-//         <Button boxSize="20px">+</Button>
-//       </Box>
-//     </Box>
-//     <hr />
-
-//   </Box>
-
-// </>
-// y
 
 const Join = () => {
   return (

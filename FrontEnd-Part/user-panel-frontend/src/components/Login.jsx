@@ -25,14 +25,17 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../redux/AuthReducer/Action";
 import axios from "axios";
+
+
 export function DrawerExample({ onOpen, isOpen, onClose, btnRef }) {
   const [data, setData] = useState({});
+  const {isError , isAuth , token} = useSelector((store) => store.AuthReducer)
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
   });
   const toast = useToast();
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleOnchange = (e) => {
@@ -107,26 +110,15 @@ export function DrawerExample({ onOpen, isOpen, onClose, btnRef }) {
   };
   const handleCheckUser = async (e) => {
     e.preventDefault();
-    await dispatch(
-      userLogin({ email: formValue.email, password: formValue.password })
-    )
-      .then(() => {
-        navigate("/");
-        onClose();
-        toast({
-          title: "Login successful!",
-          status: "success",
-          isClosable: true,
-        });
-      })
-      .catch((err) => {
-        toast({
-          title: "Something went wrong please try again",
-          status: "error",
-          isClosable: true,
-        });
-      });
-  };
+    
+    dispatch(userLogin({email : formValue.email , password : formValue.password} , toast , onClose, Navigate))
+    
+    
+    }
+
+
+    
+
   return (
     <>
       <Drawer
