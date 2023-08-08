@@ -44,14 +44,14 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const success = async (position) => {
     console.log(position.coords.latitude, position.coords.longitude);
-    const promis = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=07dab470b0004f5e9b651111221512&q=${position.coords.latitude},${position.coords.longitude}&aqi=yes`
-    );
-    promis.json().then((res) => {
-      console.log(res.location.name);
-      // setLoc(res.location.name);
-      dispatch(getData(res.location.name));
-    });
+    // const promis = await fetch(
+    //   `http://api.weatherapi.com/v1/current.json?key=07dab470b0004f5e9b651111221512&q=${position.coords.latitude},${position.coords.longitude}&aqi=yes`
+    // );
+    // promis.json().then((res) => {
+    //   console.log(res.location.name);
+    //   // setLoc(res.location.name);
+    //   dispatch(getData(res.location.name));
+    // });
   };
   const error = () => {
     dispatch(getData("Delhi"));
@@ -59,7 +59,6 @@ const Navbar = () => {
 
   const handleChange = (e) => {
     setCity(e.target.value);
-   
   };
   const handleCity = (e) => {
     dispatch(getData(city));
@@ -68,7 +67,6 @@ const Navbar = () => {
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(success, error);
-
   }, [cartrender]);
 
   return (
